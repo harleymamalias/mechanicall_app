@@ -18,13 +18,10 @@ const Color tCharcoal = Color(0xFF273E47);
 //text styles!!
 final tInterBold =
     GoogleFonts.inter(fontWeight: FontWeight.w700, color: tMidnightBlue);
-
 final tInterSemiBold =
     GoogleFonts.inter(fontWeight: FontWeight.w600, color: tMidnightBlue);
-
 final tInterMedium =
     GoogleFonts.inter(fontWeight: FontWeight.w500, color: tMidnightBlue);
-
 final tInterRegular =
     GoogleFonts.inter(fontWeight: FontWeight.w400, color: tMidnightBlue);
 
