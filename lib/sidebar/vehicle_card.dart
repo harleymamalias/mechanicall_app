@@ -22,7 +22,7 @@ class VehicleCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
       child: Container(
-        height: SizeConfig.blockSizeVertical! * 20,
+        height: SizeConfig.blockSizeVertical! * 18,
         decoration: BoxDecoration(
           color: tCharcoal,
           borderRadius: BorderRadius.circular(16),
