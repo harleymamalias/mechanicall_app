@@ -215,6 +215,30 @@ class CarOwnerSidebarCard extends StatelessWidget {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 0, 8.0),
+            child: ListTile(
+              leading: Icon(
+                Icons.logout_rounded,
+                color: tWhite,
+              ),
+              title: Text(
+                'Log Out',
+                style: tInterRegular.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                ),
+              ),
+              onTap: () {
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => PrivacyStatementPage()),
+                // );
+              },
+            ),
+          )
         ],
       ),
     );

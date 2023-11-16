@@ -7,7 +7,13 @@ class DataBackupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Backup Page'),
+        title: Text(
+          'Data Backup Page',
+          style: tInterRegular.copyWith(
+            fontWeight: FontWeight.w600,
+            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+          ),
+        ),
       ),
       body: Center(
         child: Text('Data Backup Content'),

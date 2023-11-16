@@ -14,6 +14,7 @@ const Color tEcru = Color(0xFFD8C99B);
 const Color tButterscotch = Color(0xFFD8973C);
 const Color tAlloyOrange = Color(0xFFBD632F);
 const Color tCharcoal = Color(0xFF273E47);
+const Color tOrange = Color(0xFFF9AB00);
 
 //text styles!!
 final tInterBold =
