@@ -287,7 +287,7 @@ class ManageProfilePage extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(5),
-                    labelText: 'Last Name',
+                    labelText: 'Mamalias',
                     hintText: 'Edit Last Name',
                     hintStyle: tInterBold.copyWith(
                       color: tCharcoal,

@@ -29,7 +29,7 @@ class TransactionCard extends StatelessWidget {
         height: SizeConfig.blockSizeVertical! * 20,
         decoration: BoxDecoration(
           color: tCharcoal,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           children: [
@@ -42,7 +42,7 @@ class TransactionCard extends StatelessWidget {
                     height: SizeConfig.blockSizeVertical! * 25,
                     decoration: BoxDecoration(
                       color: tOrange,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(12),
                       image: DecorationImage(
                         image: AssetImage(vehicleImage),
                         fit: BoxFit.cover,
@@ -190,10 +190,10 @@ class TransactionCard extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: tButterscotch,
+                  color: tOrange,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(8.0),
-                    bottomRight: Radius.circular(8.0),
+                    bottomLeft: Radius.circular(12.0),
+                    bottomRight: Radius.circular(12.0),
                   ),
                 ),
                 child: Row(
