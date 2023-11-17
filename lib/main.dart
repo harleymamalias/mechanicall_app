@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_styles.dart';
+import 'sidebar/sidebar_button.dart';
 import 'size_config.dart';
 import '../sidebar/car-owner_sidebar_card.dart';
 
@@ -38,38 +38,18 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: tCharcoal,
-            title: Text(
-              'Sidebar',
-              style: tInterRegular.copyWith(
-                color: Colors.white,
-                fontSize: SizeConfig.blockSizeHorizontal! * 5,
-              ),
+        body: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SidebarButton(),
+              ],
             ),
-            // actions: [
-            //   Container(
-            //     margin: EdgeInsets.all(8.0),
-            //     decoration: BoxDecoration(
-            //       color: Colors.white,
-            //       borderRadius: BorderRadius.circular(16.0),
-            //     ),
-            //     child: Builder(
-            //       builder: (builderContext) => IconButton(
-            //         icon: Icon(
-            //           Icons.menu,
-            //           color: Color(0xff273E47),
-            //         ),
-            //         onPressed: () {
-            //           Scaffold.of(builderContext).openEndDrawer();
-            //         },
-            //       ),
-            //     ),
-            //   ),
-            // ],
-            iconTheme: IconThemeData(color: tWhite)),
-        body: Center(
-          child: Text('Main Body'),
+            Center(
+              child: Text('Main Body'),
+            ),
+          ],
         ),
         endDrawer: CarOwnerSidebarCard());
   }
