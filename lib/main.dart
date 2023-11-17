@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'app_styles.dart';
 import 'sidebar/sidebar_button.dart';
 import 'size_config.dart';
 import '../sidebar/car-owner_sidebar_card.dart';
@@ -38,6 +39,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+        backgroundColor: tCharcoal,
         body: Column(
           children: [
             Row(
@@ -47,7 +49,12 @@ class HomePage extends StatelessWidget {
               ],
             ),
             Center(
-              child: Text('Main Body'),
+              child: Text(
+                'Main Body',
+                style: tInterBold.copyWith(
+                  color: tWhite,
+                ),
+              ),
             ),
           ],
         ),
