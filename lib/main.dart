@@ -42,6 +42,9 @@ class HomePage extends StatelessWidget {
         backgroundColor: tCharcoal,
         body: Column(
           children: [
+            SizedBox(
+              height: 22,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
