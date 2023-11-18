@@ -76,43 +76,95 @@ class _ReportIssuePageState extends State<ReportIssuePage> {
                     padding: const EdgeInsets.all(16.0),
                     child: ListView(
                       children: [
-                        Text(
-                          'Issue Details',
-                          style: tInterBold.copyWith(
-                            color: tCharcoal,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: tOrange, width: 2.5),
+                            color: tWhite,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: tCharcoal.withOpacity(0.125),
+                                offset: const Offset(0.0, 3.0),
+                                blurRadius: 24.0,
+                                spreadRadius: 0.0,
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Issue Details',
+                                  style: tInterBold.copyWith(
+                                    color: tCharcoal,
+                                    fontSize:
+                                        SizeConfig.blockSizeHorizontal! * 5,
+                                  ),
+                                ),
+                                buildIssueTypeDropdown(),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                buildSeverityDropdown(),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                buildDescriptionTextField(),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        buildIssueTypeDropdown(),
                         SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
-                        buildSeverityDropdown(),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        buildDescriptionTextField(),
-                        SizedBox(
-                          height: 10,
-                        ),
-
-                        Text(
-                          'Environment Details',
-                          style: tInterBold.copyWith(
-                            color: tCharcoal,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: tOrange, width: 2.5),
+                            color: tWhite,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: tCharcoal.withOpacity(0.125),
+                                offset: const Offset(0.0, 3.0),
+                                blurRadius: 24.0,
+                                spreadRadius: 0.0,
+                              ),
+                            ],
                           ),
-                        ),
-                        buildNetworkConnectionDropdown(),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        buildFrequencyDropdown(),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 10,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Environment Details',
+                                  style: tInterBold.copyWith(
+                                    color: tCharcoal,
+                                    fontSize:
+                                        SizeConfig.blockSizeHorizontal! * 5,
+                                  ),
+                                ),
+                                buildNetworkConnectionDropdown(),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                buildFrequencyDropdown(),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         buildConsentCheckbox(),
                         SizedBox(
@@ -185,11 +237,11 @@ class _ReportIssuePageState extends State<ReportIssuePage> {
 
   Widget buildDescriptionTextField() {
     return Container(
-      height: 150,
+      height: SizeConfig.blockSizeVertical! * 15,
       padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey, // Add border color if needed
+          color: tCharcoal, // Add border color if needed
           width: 1.0,
         ),
         borderRadius:
@@ -278,7 +330,7 @@ class _ReportIssuePageState extends State<ReportIssuePage> {
           },
         ),
         Container(
-          width: SizeConfig.blockSizeHorizontal! * 75,
+          width: SizeConfig.blockSizeHorizontal! * 70,
           child: Text(
             'I consent to the collection of anonymous usage data to improve the app.',
             style: tInterMedium.copyWith(
