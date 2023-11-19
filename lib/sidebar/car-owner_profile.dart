@@ -355,8 +355,7 @@ class ManageProfilePage extends StatelessWidget {
                             backgroundColor: tOrange,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(24), // BorderRadius
+                              borderRadius: BorderRadius.circular(24),
                             ),
                           ),
                           child: Text(
