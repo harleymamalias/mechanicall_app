@@ -28,7 +28,11 @@ class TransactionCard extends StatelessWidget {
       child: Container(
         height: SizeConfig.blockSizeVertical! * 20,
         decoration: BoxDecoration(
-          color: tCharcoal,
+          gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: [tCharcoal, Color(0xff125670)],
+          ),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
