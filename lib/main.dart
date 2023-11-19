@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_styles.dart';
+import 'sidebar/service-provider_sidebar_card.dart';
 import 'sidebar/sidebar_button.dart';
 import 'size_config.dart';
 import '../sidebar/car-owner_sidebar_card.dart';
@@ -64,6 +65,6 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-        endDrawer: CarOwnerSidebarCard());
+        endDrawer: ServiceProviderSidebar());
   }
 }
