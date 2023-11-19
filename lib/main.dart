@@ -43,13 +43,16 @@ class HomePage extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(
-              height: 22,
+              height: 16,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SidebarButton(),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SidebarButton(),
+                ],
+              ),
             ),
             Center(
               child: Text(
