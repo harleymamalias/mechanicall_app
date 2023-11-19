@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_styles.dart';
 import '../size_config.dart';
 
-class ManageProfilePage extends StatelessWidget {
+class ManageServiceProviderProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -137,7 +137,7 @@ class ManageProfilePage extends StatelessWidget {
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
                                               image: AssetImage(
-                                                  'assets/images/harls.jpg'),
+                                                  'assets/images/meksel.jpg'),
                                               fit: BoxFit.cover,
                                             ),
                                             boxShadow: [
@@ -178,7 +178,7 @@ class ManageProfilePage extends StatelessWidget {
                               ),
                               Center(
                                 child: Text(
-                                  'Harley Mamalias',
+                                  'Manoy Mexl',
                                   style: tInterSemiBold.copyWith(
                                     color: tWhite,
                                     fontSize:
@@ -229,7 +229,7 @@ class ManageProfilePage extends StatelessWidget {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 0.0),
                                             child: Text(
-                                              'Premium',
+                                              'Service Provider',
                                               style: tInterSemiBold.copyWith(
                                                 color: tCharcoal,
                                                 fontSize: SizeConfig

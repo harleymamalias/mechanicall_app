@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import '../app_styles.dart';
 import '../size_config.dart';
-import '../sidebar/car-owner_profile.dart';
-import '../sidebar/car-owner_vehicles.dart';
-import '../sidebar/car-owner_history.dart';
-import '../sidebar/premium_page.dart';
 import '../sidebar/privacy-statement.dart';
 import '../sidebar/report_issue.dart';
 import '../sidebar/car-owner_d_backup.dart';
 import 'service-provider_certifications_page.dart';
+import 'service-provider_history.dart';
+import 'service-provider_profile.dart';
 
 class ServiceProviderSidebar extends StatelessWidget {
   @override
@@ -28,13 +26,13 @@ class ServiceProviderSidebar extends StatelessWidget {
                 Center(
                   child: CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/images/harls.jpg'),
+                    backgroundImage: AssetImage('assets/images/meksel.jpg'),
                   ),
                 ),
                 SizedBox(height: 10),
                 Center(
                   child: Text(
-                    'Harley Mamalias',
+                    'Manoy Mexl',
                     style: tInterRegular.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -75,7 +73,8 @@ class ServiceProviderSidebar extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ManageProfilePage()),
+                            builder: (context) =>
+                                ManageServiceProviderProfilePage()),
                       );
                     },
                   ),
@@ -114,8 +113,27 @@ class ServiceProviderSidebar extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CarOwnerHistoryPage()),
+                            builder: (context) => ServiceProviderHistoryPage()),
                       );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: ListTile(
+                    title: Text(
+                      'View Feedbacks and Ratings',
+                      style: tInterRegular.copyWith(
+                        color: Colors.white,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
+                      ),
+                    ),
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => ServiceProviderFeedback()),
+                      // );
                     },
                   ),
                 ),
