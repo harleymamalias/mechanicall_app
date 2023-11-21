@@ -17,6 +17,10 @@ class CarOwnerBookMaintenancePage extends StatefulWidget {
 
 class _CarOwnerBookMaintenancePageState
     extends State<CarOwnerBookMaintenancePage> {
+  String? _selectedServiceProvider; //slekted
+  TimeOfDay? _selectedTime; //time
+  late final ValueNotifier<TimeOfDay?> _selectedTimeNotifier;
+//time
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -33,6 +37,7 @@ class _CarOwnerBookMaintenancePageState
     super.initState();
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    _selectedTimeNotifier = ValueNotifier(_selectedTime);
   }
 
   void dispose() {
@@ -189,22 +194,66 @@ class _CarOwnerBookMaintenancePageState
                                   return Container(
                                     margin: EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: tWhite),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
+                                        colors: [tCharcoal, Color(0xff125670)],
+                                      ),
                                       borderRadius: BorderRadius.circular(12),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color:
+                                              Colors.black.withOpacity(0.170),
+                                          offset: const Offset(0.0, 3.0),
+                                          blurRadius: 15.0,
+                                          spreadRadius: 2.0,
+                                        ),
+                                      ],
                                     ),
                                     child: ListTile(
                                       onTap: () => print(""),
                                       title: Column(
                                         children: [
                                           Text(
-                                            '${event.title}',
+                                            '${event.eventType}',
                                             style: tInterBold.copyWith(
-                                                color: tWhite),
+                                                color: tWhite,
+                                                fontSize: SizeConfig
+                                                        .blockSizeHorizontal! *
+                                                    5),
                                           ),
                                           Text(
-                                            '${event.description}',
+                                            '${event.serviceProviderName}',
                                             style: tInterMedium.copyWith(
-                                                color: tWhite),
+                                                color: tWhite,
+                                                fontSize: SizeConfig
+                                                        .blockSizeHorizontal! *
+                                                    4.5),
+                                          ),
+                                          Text(
+                                            '${event.bookingDescription}',
+                                            style: tInterBold.copyWith(
+                                                color: tWhite,
+                                                fontSize: SizeConfig
+                                                        .blockSizeHorizontal! *
+                                                    4.5),
+                                          ),
+                                          Text(
+                                            'Time: ${event.bookingTime.format(context)}',
+                                            style: tInterMedium.copyWith(
+                                              color: tWhite,
+                                              fontSize: SizeConfig
+                                                      .blockSizeHorizontal! *
+                                                  4.5,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Status: ${getBookingStatusString(event.bookingStatus)}',
+                                            style: tInterMedium.copyWith(
+                                                color: tWhite,
+                                                fontSize: SizeConfig
+                                                        .blockSizeHorizontal! *
+                                                    4.5),
                                           ),
                                         ],
                                       ),
@@ -271,80 +320,136 @@ class _CarOwnerBookMaintenancePageState
             padding: const EdgeInsets.all(4.0),
             child: Container(
               height: SizeConfig.blockSizeVertical! * 50,
-              child: Column(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                        labelText: "Appointment Description",
-                        labelStyle: tInterMedium),
-                    controller: _eventController,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(labelText: "Description"),
-                    controller: _eventDescriptionController,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    height: SizeConfig.blockSizeVertical! * 30,
-                    child: ListView(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ServiceProviderCard(
-                          serviceProviderName: 'Manoy Mexl',
-                          serviceProviderPhoto: 'assets/images/meksel.jpg',
-                          serviceProviderSpecialties:
-                              'Fixing Tires, Fixing Batteries',
-                          email: 'ManoyMexl@sample.com',
-                          phoneNumber: '+123 456 7890',
-                          location: "San Fernando City, Cebu",
-                          certifications: [
-                            'Certification1',
-                            'Certification2',
-                            'Certification3'
-                          ],
-                          rating: 4.5,
+                        Text("Select Service Provider",
+                            style: tInterSemiBold.copyWith(
+                                fontSize:
+                                    SizeConfig.blockSizeHorizontal! * 3.5)),
+                        Container(
+                          height: SizeConfig.blockSizeVertical! * 15,
+                          child: ListView(
+                            children: [
+                              ServiceProviderCard(
+                                serviceProviderName: 'Manoy Mexl',
+                                serviceProviderPhoto:
+                                    'assets/images/meksel.jpg',
+                                serviceProviderSpecialties:
+                                    'Fixing Tires, Fixing Batteries',
+                                email: 'ManoyMexl@sample.com',
+                                phoneNumber: '+123 456 7890',
+                                location: "San Fernando City, Cebu",
+                                certifications: [
+                                  'Certification1',
+                                  'Certification2',
+                                  'Certification3'
+                                ],
+                                rating: 4.5,
+                                onServiceProviderSelected:
+                                    _updateSelectedServiceProvider,
+                              ),
+                              ServiceProviderCard(
+                                serviceProviderName: 'Machew D Alcs',
+                                serviceProviderPhoto:
+                                    'assets/images/machew.png',
+                                serviceProviderSpecialties:
+                                    'Repairs Breaks, Suspensions and many other technicalities',
+                                email: 'machewdalcs@sample.com',
+                                phoneNumber: '+456 123 0987',
+                                location: "Argao City, Cebu",
+                                certifications: [
+                                  'Certification1',
+                                  'Certification2',
+                                  'Certification3'
+                                ],
+                                rating: 3.5,
+                                onServiceProviderSelected:
+                                    _updateSelectedServiceProvider,
+                              ),
+                            ],
+                          ),
                         ),
-                        ServiceProviderCard(
-                          serviceProviderName: 'Machew D Alcs',
-                          serviceProviderPhoto: 'assets/images/machew.png',
-                          serviceProviderSpecialties:
-                              'Repairs Breaks, Suspensions and many other technicalities',
-                          email: 'machewdalcs@sample.com',
-                          phoneNumber: '+456 123 0987',
-                          location: "Argao City, Cebu",
-                          certifications: [
-                            'Certification1',
-                            'Certification2',
-                            'Certification3'
-                          ],
-                          rating: 3.5,
+                        Text(
+                          'Selected Service Provider: ${_selectedServiceProvider ?? ""}',
+                          style: tInterSemiBold.copyWith(
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
+                          ),
                         ),
+
+                        ElevatedButton(
+                          onPressed: () {
+                            // When the button is pressed, show the time picker
+                            _selectTime(context);
+                          },
+                          child: Text("Select Time"),
+                        ),
+                        ValueListenableBuilder<TimeOfDay?>(
+                          valueListenable: _selectedTimeNotifier,
+                          builder: (context, selectedTime, _) {
+                            if (selectedTime != null) {
+                              return Text(
+                                'Selected Time: ${selectedTime.format(context)}',
+                                style: tInterSemiBold.copyWith(
+                                  fontSize:
+                                      SizeConfig.blockSizeHorizontal! * 3.5,
+                                ),
+                              );
+                            } else {
+                              return Container(); // Return an empty container if no time is selected
+                            }
+                          },
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                              labelText: "Appointment Description",
+                              labelStyle: tInterSemiBold.copyWith(
+                                  fontSize:
+                                      SizeConfig.blockSizeHorizontal! * 3.5)),
+                          controller: _eventController,
+                        ),
+                        // TextField(
+                        //   decoration: InputDecoration(labelText: "Description"),
+                        //   controller: _eventDescriptionController,
+                        // ),
                       ],
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           actions: [
             ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: tOrange,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
                 onPressed: () {
                   DateTime selectedDay = _selectedDay!;
+                  Event newAppointment = Event(
+                    serviceProviderName: _selectedServiceProvider ?? '',
+                    bookingDescription: _eventController.text,
+                    bookingTime:
+                        _selectedTime ?? TimeOfDay(hour: 12, minute: 0),
+                    bookingStatus: BookingStatus.pending,
+                  );
                   if (events.containsKey(selectedDay)) {
-                    events[selectedDay]!.add(
-                      Event(_eventController.text,
-                          _eventDescriptionController.text),
-                    );
+                    events[selectedDay]!.add(newAppointment);
                   } else {
-                    events[selectedDay] = [
-                      Event(_eventController.text,
-                          _eventDescriptionController.text),
-                    ];
+                    events[selectedDay] = [newAppointment];
                   }
                   setState(() {
                     _selectedDay = selectedDay;
                     _selectedEvents.value = _getEventsForDay(selectedDay);
+                    _selectedServiceProvider =
+                        null; // Clear the selected service provider
                   });
 
                   Navigator.of(context).pop();
@@ -354,6 +459,26 @@ class _CarOwnerBookMaintenancePageState
         );
       },
     );
+  }
+
+  void _updateSelectedServiceProvider(String serviceProviderName) {
+    setState(() {
+      _selectedServiceProvider = serviceProviderName;
+    });
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime ?? TimeOfDay.now(),
+    );
+
+    if (picked != null && picked != _selectedTime) {
+      setState(() {
+        _selectedTime = picked;
+        _selectedTimeNotifier.value = picked; // Notify listeners of the change
+      });
+    }
   }
 
   void _showMaintenanceForm() {
@@ -366,34 +491,157 @@ class _CarOwnerBookMaintenancePageState
       },
     );
   }
+}
 
-  Future<List<ServiceProviderCard>> _getServiceProviders() async {
-    await Future.delayed(
-        Duration(seconds: 1)); // Simulate an API call or database fetch
+// void _showAppointmentForm() {
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return AlertDialog(
+//         title: Text("Add Appointment"),
+//         content: Padding(
+//           padding: const EdgeInsets.all(4.0),
+//           child: Container(
+//             height: SizeConfig.blockSizeVertical! * 50,
+//             child: SingleChildScrollView(
+//               child: Column(
+//                 children: [
+//                   Column(
+//                     mainAxisAlignment: MainAxisAlignment.start,
+//                     children: [
+//                       Text("Select Service Provider",
+//                           style: tInterSemiBold.copyWith(
+//                               fontSize:
+//                                   SizeConfig.blockSizeHorizontal! * 3.5)),
+//                       Container(
+//                         height: SizeConfig.blockSizeVertical! * 15,
+//                         child: ListView(
+//                           children: [
+//                             ServiceProviderCard(
+//                               serviceProviderName: 'Manoy Mexl',
+//                               serviceProviderPhoto:
+//                                   'assets/images/meksel.jpg',
+//                               serviceProviderSpecialties:
+//                                   'Fixing Tires, Fixing Batteries',
+//                               email: 'ManoyMexl@sample.com',
+//                               phoneNumber: '+123 456 7890',
+//                               location: "San Fernando City, Cebu",
+//                               certifications: [
+//                                 'Certification1',
+//                                 'Certification2',
+//                                 'Certification3'
+//                               ],
+//                               rating: 4.5,
+//                             ),
+//                             ServiceProviderCard(
+//                               serviceProviderName: 'Machew D Alcs',
+//                               serviceProviderPhoto:
+//                                   'assets/images/machew.png',
+//                               serviceProviderSpecialties:
+//                                   'Repairs Breaks, Suspensions and many other technicalities',
+//                               email: 'machewdalcs@sample.com',
+//                               phoneNumber: '+456 123 0987',
+//                               location: "Argao City, Cebu",
+//                               certifications: [
+//                                 'Certification1',
+//                                 'Certification2',
+//                                 'Certification3'
+//                               ],
+//                               rating: 3.5,
+//                             ),
+//                           ],
+//                         ),
+//                       ),
 
-    return [
-      ServiceProviderCard(
-        serviceProviderName: 'Manoy Mexl',
-        serviceProviderPhoto: 'assets/images/meksel.jpg',
-        serviceProviderSpecialties: 'Fixing Tires, Fixing Batteries',
-        email: 'ManoyMexl@sample.com',
-        phoneNumber: '+123 456 7890',
-        location: "San Fernando City, Cebu",
-        certifications: ['Certification1', 'Certification2', 'Certification3'],
-        rating: 4.5,
-      ),
-      ServiceProviderCard(
-        serviceProviderName: 'Machew D Alcs',
-        serviceProviderPhoto: 'assets/images/machew.png',
-        serviceProviderSpecialties:
-            'Repairs Breaks, Suspensions and many other technicalities',
-        email: 'machewdalcs@sample.com',
-        phoneNumber: '+456 123 0987',
-        location: "Argao City, Cebu",
-        certifications: ['Certification1', 'Certification2', 'Certification3'],
-        rating: 3.5,
-      ),
-      // Add more service providers as needed
-    ];
+//                       ElevatedButton(
+//                         onPressed: () {
+//                           // When the button is pressed, show the time picker
+//                           _selectTime(context);
+//                         },
+//                         child: Text("Select Time"),
+//                       ),
+//                       ValueListenableBuilder<TimeOfDay?>(
+//                         valueListenable: _selectedTimeNotifier,
+//                         builder: (context, selectedTime, _) {
+//                           if (selectedTime != null) {
+//                             return Text(
+//                               'Selected Time: ${selectedTime.format(context)}',
+//                               style: tInterSemiBold.copyWith(
+//                                 fontSize:
+//                                     SizeConfig.blockSizeHorizontal! * 3.5,
+//                               ),
+//                             );
+//                           } else {
+//                             return Container(); // Return an empty container if no time is selected
+//                           }
+//                         },
+//                       ),
+//                       TextField(
+//                         decoration: InputDecoration(
+//                             labelText: "Appointment Description",
+//                             labelStyle: tInterSemiBold.copyWith(
+//                                 fontSize:
+//                                     SizeConfig.blockSizeHorizontal! * 3.5)),
+//                         controller: _eventController,
+//                       ),
+//                       // TextField(
+//                       //   decoration: InputDecoration(labelText: "Description"),
+//                       //   controller: _eventDescriptionController,
+//                       // ),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//         actions: [
+//           ElevatedButton(
+//               style: ElevatedButton.styleFrom(
+//                 backgroundColor: tOrange,
+//                 foregroundColor: Colors.white,
+//                 shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.circular(24),
+//                 ),
+//               ),
+//               onPressed: () {
+//                 DateTime selectedDay = _selectedDay!;
+//                 if (events.containsKey(selectedDay)) {
+//                   events[selectedDay]!.add(
+//                     Event(_eventController.text,
+//                         _eventDescriptionController.text),
+//                   );
+//                 } else {
+//                   events[selectedDay] = [
+//                     Event(_eventController.text,
+//                         _eventDescriptionController.text),
+//                   ];
+//                 }
+//                 setState(() {
+//                   _selectedDay = selectedDay;
+//                   _selectedEvents.value = _getEventsForDay(selectedDay);
+//                 });
+
+//                 Navigator.of(context).pop();
+//               },
+//               child: Text("Add Appointment")),
+//         ],
+//       );
+//     },
+//   );
+// }
+
+String getBookingStatusString(BookingStatus status) {
+  switch (status) {
+    case BookingStatus.pending:
+      return 'Pending';
+    case BookingStatus.confirmed:
+      return 'Confirmed';
+    case BookingStatus.completed:
+      return 'Completed';
+    case BookingStatus.canceled:
+      return 'Canceled';
+    default:
+      return 'Unknown';
   }
 }

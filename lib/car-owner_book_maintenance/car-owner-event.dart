@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 
 class Event {
-  final String title;
-  final String description;
-  Event(this.title, this.description);
+  String eventType;
+  String serviceProviderName;
+  String bookingDescription;
+  TimeOfDay bookingTime;
+  BookingStatus bookingStatus;
+
+  Event({
+    this.eventType = "Appointment",
+    this.serviceProviderName = '',
+    this.bookingDescription = '',
+    this.bookingTime = const TimeOfDay(hour: 12, minute: 0),
+    this.bookingStatus = BookingStatus.pending,
+  });
 }
 
 class AppointmentEvent {
@@ -54,3 +64,10 @@ enum MaintenanceStatus {
   completed,
   canceled,
 }
+
+// class Event {
+//   final String title;
+//   final String description;
+  
+//   Event(this.title, this.description);
+// }
