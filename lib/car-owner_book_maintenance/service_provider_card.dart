@@ -11,6 +11,7 @@ class ServiceProviderCard extends StatelessWidget {
   final String phoneNumber;
   final String location;
   final List<String> certifications;
+  final double rating;
 
   const ServiceProviderCard({
     required this.serviceProviderName,
@@ -20,6 +21,7 @@ class ServiceProviderCard extends StatelessWidget {
     required this.phoneNumber,
     required this.location,
     required this.certifications,
+    required this.rating,
     super.key,
   });
 
@@ -67,19 +69,20 @@ class ServiceProviderCard extends StatelessWidget {
                       ],
                     ),
                     child: Align(
-                      alignment: Alignment(0.4, -2),
+                      alignment: Alignment(0.4, -1.2),
                       child: Container(
-                        width: SizeConfig.blockSizeHorizontal! * 3,
-                        height: SizeConfig.blockSizeVertical! * 3,
+                        width: SizeConfig.blockSizeHorizontal! * 2,
+                        height: SizeConfig.blockSizeVertical! * 2,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.green,
-                            border: Border.all(width: 1, color: Colors.black)),
+                            border:
+                                Border.all(width: 0.8, color: Colors.black)),
                         child: Padding(
-                          padding: const EdgeInsets.all(3.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: Container(
-                            width: SizeConfig.blockSizeHorizontal! * 1.5,
-                            height: SizeConfig.blockSizeVertical! * 1.5,
+                            width: SizeConfig.blockSizeHorizontal! * 1,
+                            height: SizeConfig.blockSizeVertical! * 1,
                             decoration: BoxDecoration(shape: BoxShape.circle),
                           ),
                         ),
@@ -90,12 +93,12 @@ class ServiceProviderCard extends StatelessWidget {
                     height: 5,
                   ),
                   RatingBar.builder(
-                    initialRating: 4,
+                    initialRating: rating,
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
                     itemCount: 5,
-                    itemSize: SizeConfig.blockSizeHorizontal! * 3.5,
+                    itemSize: SizeConfig.blockSizeHorizontal! * 3,
                     itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
                     itemBuilder: (context, _) => Icon(
                       Icons.star,
@@ -116,46 +119,46 @@ class ServiceProviderCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: SizeConfig.blockSizeHorizontal! * 70,
+                    width: SizeConfig.blockSizeHorizontal! * 35,
                     child: Text(
                       "Name: $serviceProviderName",
                       style: tInterBold.copyWith(
                           color: tWhite,
-                          fontSize: SizeConfig.blockSizeVertical! * 1.5),
+                          fontSize: SizeConfig.blockSizeVertical! * 1.3),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
                   ),
                   Container(
-                    width: SizeConfig.blockSizeHorizontal! * 70,
+                    width: SizeConfig.blockSizeHorizontal! * 35,
                     child: Text(
                       "$phoneNumber / $email",
                       style: tInterMedium.copyWith(
                           color: tWhite,
-                          fontSize: SizeConfig.blockSizeVertical! * 1.3),
+                          fontSize: SizeConfig.blockSizeVertical! * 1),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
                   ),
                   Container(
-                    width: SizeConfig.blockSizeHorizontal! * 70,
+                    width: SizeConfig.blockSizeHorizontal! * 35,
                     child: Text(
                       "Specialties: $serviceProviderSpecialties",
                       style: tInterBold.copyWith(
                           color: tWhite,
-                          fontSize: SizeConfig.blockSizeVertical! * 1.3),
+                          fontSize: SizeConfig.blockSizeVertical! * 1),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
                   ),
                   Container(
-                    width: SizeConfig.blockSizeHorizontal! * 70,
+                    width: SizeConfig.blockSizeHorizontal! * 35,
                     child: Text(
                       "Location: "
                       "Talisay City, Cebu",
                       style: tInterBold.copyWith(
                           color: tWhite,
-                          fontSize: SizeConfig.blockSizeVertical! * 1.3),
+                          fontSize: SizeConfig.blockSizeVertical! * 1),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),

@@ -1,32 +1,24 @@
 import 'package:flutter/material.dart';
 
+class Event {
+  final String title;
+  final String description;
+  Event(this.title, this.description);
+}
+
 class AppointmentEvent {
+  String eventType;
   String serviceProviderName;
   String bookingDescription;
-  DateTime bookingDate;
   TimeOfDay bookingTime;
   BookingStatus bookingStatus;
 
   AppointmentEvent({
+    this.eventType = "Appointment",
     required this.serviceProviderName,
     required this.bookingDescription,
-    required this.bookingDate,
     required this.bookingTime,
     required this.bookingStatus,
-  });
-}
-
-class MaintenanceSchedule {
-  String serviceProviderName;
-  List<DateTime> maintenanceDates;
-  TimeOfDay maintenanceTime;
-  MaintenanceStatus maintenanceStatus;
-
-  MaintenanceSchedule({
-    required this.serviceProviderName,
-    required this.maintenanceDates,
-    required this.maintenanceTime,
-    required this.maintenanceStatus,
   });
 }
 
@@ -35,6 +27,24 @@ enum BookingStatus {
   confirmed,
   completed,
   canceled,
+}
+
+class MaintenanceSchedule {
+  String eventType;
+  String serviceProviderName;
+  String maintenanceDescription;
+  List<DateTime> maintenanceDates;
+  TimeOfDay maintenanceTime;
+  MaintenanceStatus maintenanceStatus;
+
+  MaintenanceSchedule({
+    this.eventType = "Maintenance",
+    required this.serviceProviderName,
+    required this.maintenanceDescription,
+    required this.maintenanceDates,
+    required this.maintenanceTime,
+    required this.maintenanceStatus,
+  });
 }
 
 enum MaintenanceStatus {
