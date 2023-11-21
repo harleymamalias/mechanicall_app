@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_styles.dart';
+import 'car-owner_book_maintenance/car-owner_book_maintenance.dart';
 import 'sidebar/service-provider_sidebar_card.dart';
 import 'sidebar/sidebar_button.dart';
 import 'size_config.dart';
@@ -62,6 +63,22 @@ class HomePage extends StatelessWidget {
                   color: tWhite,
                 ),
               ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CarOwnerBookMaintenancePage()),
+                );
+              },
+              child: Text("Book Appointment / Schedule Maintenance",
+                  style: tInterSemiBold.copyWith()),
             ),
           ],
         ),

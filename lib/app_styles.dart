@@ -7,8 +7,10 @@ const Color tWhite2 = Color(0xFFFCFCFC);
 const Color tWhite3 = Color(0xFFEFF5F4);
 const Color tGrey = Color(0xFF9397A0);
 const Color tGrey2 = Color(0xFFA7A7A7);
+const Color tGrey3 = Color(0xFF666666);
 
 const Color tMidnightBlue = Color(0xFF19202D);
+const Color tLightAmaranthPurple = Color.fromARGB(255, 163, 93, 106);
 const Color tAmaranthPurple = Color(0xFFA4243B);
 const Color tEcru = Color(0xFFD8C99B);
 const Color tButterscotch = Color(0xFFD8973C);
