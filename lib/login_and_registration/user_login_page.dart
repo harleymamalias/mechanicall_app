@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mechanicall_app/login_and_registration/create_account_options.dart';
-import 'package:mechanicall_app/widgets/password_input_field.dart';
+import 'package:mechanicall_app/widgets/input_fields/password_input_field.dart';
 import 'package:mechanicall_app/widgets/social_media.dart';
-import 'package:mechanicall_app/widgets/text_input_field.dart';
+import 'package:mechanicall_app/widgets/input_fields/text_input_field.dart';
 
 class UserLoginPage extends StatelessWidget {
   UserLoginPage({super.key});
@@ -58,7 +58,6 @@ class UserLoginPage extends StatelessWidget {
                         TextInputField(
                           controller: usernameController,
                           textPlaceHolder: 'Username',
-                          obscureText: false,
                           textInputType: TextInputType.text,
                         ),
                         const SizedBox(
@@ -73,7 +72,50 @@ class UserLoginPage extends StatelessWidget {
                           height: 10,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Login Successful',
+                                    style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  content: Text(
+                                    'Welcome back! Your login was successful.',
+                                    style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                          color: Colors.black, fontSize: 14),
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        //to home screen
+                                      },
+                                      child: Text(
+                                        'OK',
+                                        style: GoogleFonts.inter(
+                                          textStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           style: TextButton.styleFrom(
                             backgroundColor: const Color(0xffD8973C),
                             shape: RoundedRectangleBorder(

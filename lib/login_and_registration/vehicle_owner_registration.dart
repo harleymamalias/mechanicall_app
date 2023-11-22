@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mechanicall_app/login_and_registration/user_login_page.dart';
-import 'package:mechanicall_app/widgets/password_input_field.dart';
+import 'package:mechanicall_app/widgets/input_fields/email_address_input_field.dart';
+import 'package:mechanicall_app/widgets/input_fields/password_input_field.dart';
+import 'package:mechanicall_app/widgets/input_fields/phone_number_input_field.dart';
+import 'package:mechanicall_app/widgets/registration_completed_message.dart';
 import 'package:mechanicall_app/widgets/social_media.dart';
 import 'package:mechanicall_app/widgets/terms_and_conditions.dart';
-import 'package:mechanicall_app/widgets/text_input_field.dart';
+import 'package:mechanicall_app/widgets/input_fields/text_input_field.dart';
 
 class VehicleOwnerRegistrationPage extends StatefulWidget {
   const VehicleOwnerRegistrationPage({super.key});
@@ -16,13 +19,14 @@ class VehicleOwnerRegistrationPage extends StatefulWidget {
 
 class _VehicleOwnerRegistrationPageState
     extends State<VehicleOwnerRegistrationPage> {
-  final TextEditingController firstnameController = TextEditingController();
-  final TextEditingController lastnameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController firstnameController = TextEditingController();
+  final TextEditingController lastnameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
 
   bool? isChecked = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +75,6 @@ class _VehicleOwnerRegistrationPageState
                         TextInputField(
                           controller: firstnameController,
                           textPlaceHolder: 'First Name',
-                          obscureText: false,
                           textInputType: TextInputType.text,
                         ),
                         const SizedBox(
@@ -80,7 +83,6 @@ class _VehicleOwnerRegistrationPageState
                         TextInputField(
                           controller: lastnameController,
                           textPlaceHolder: 'Last Name',
-                          obscureText: false,
                           textInputType: TextInputType.text,
                         ),
                         const SizedBox(
@@ -89,7 +91,6 @@ class _VehicleOwnerRegistrationPageState
                         TextInputField(
                           controller: usernameController,
                           textPlaceHolder: 'Username',
-                          obscureText: false,
                           textInputType: TextInputType.text,
                         ),
                         const SizedBox(
@@ -99,6 +100,22 @@ class _VehicleOwnerRegistrationPageState
                           controller: passwordController,
                           textPlaceHolder: 'Password',
                           textInputType: TextInputType.text,
+                        ),
+                        const SizedBox(
+                          height: 7,
+                        ),
+                        EmailInputField(
+                          controller: emailController,
+                          textPlaceHolder: 'Email',
+                          textInputType: TextInputType.emailAddress,
+                        ),
+                        const SizedBox(
+                          height: 7,
+                        ),
+                        PhoneNumberInputField(
+                          controller: phoneNumberController,
+                          textPlaceHolder: 'Phone Number',
+                          textInputType: TextInputType.phone,
                         ),
                         const SizedBox(
                           height: 10,
@@ -128,7 +145,7 @@ class _VehicleOwnerRegistrationPageState
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          TermsAndConditionsAndPrivacyPolicy(),
+                                          const TermsAndConditionsAndPrivacyPolicy(),
                                     ),
                                   );
                                 },
@@ -175,28 +192,7 @@ class _VehicleOwnerRegistrationPageState
                         const SizedBox(
                           height: 10,
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          style: TextButton.styleFrom(
-                            backgroundColor: const Color(0xffA4243B),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            elevation: 10,
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 40,
-                            child: Text(
-                              'Sign Up',
-                              style: GoogleFonts.inter(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        const RegistrationCompletedMessage(),
                         const SizedBox(
                           height: 30,
                         ),

@@ -11,7 +11,7 @@ class CreateAccountOptionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff273E47),
+      backgroundColor: const Color(0xff273E47),
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
@@ -46,12 +46,12 @@ class CreateAccountOptionsPage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                 VehicleOwnerRegistrationPage(),
+                                 const VehicleOwnerRegistrationPage(),
                             ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xffD8973C),
+                          backgroundColor: const Color(0xffD8973C),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -72,7 +72,7 @@ class CreateAccountOptionsPage extends StatelessWidget {
                               Text(
                                 'Vehicle \nOwner',
                                 style: GoogleFonts.inter(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -92,12 +92,12 @@ class CreateAccountOptionsPage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  ServiceProviderRegistrationPage(),
+                                  const ServiceProviderRegistrationPage(),
                             ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xffA4243B),
+                          backgroundColor: const Color(0xffA4243B),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
