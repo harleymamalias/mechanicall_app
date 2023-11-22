@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mechanicall_app/login_and_registration/create_account_options.dart';
+import 'package:mechanicall_app/widgets/password_input_field.dart';
 import 'package:mechanicall_app/widgets/social_media.dart';
 import 'package:mechanicall_app/widgets/text_input_field.dart';
 
@@ -11,121 +14,140 @@ class UserLoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Container(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: Image.asset("assets/images/login-page-logo.png"),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Login to your Account',
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  TextInputField(
-                    controller: usernameController,
-                    textPlaceHolder: 'Username',
-                    obscureText: false,
-                    textInputType: TextInputType.text,
-                  ),
-                  const SizedBox(
-                    height: 7,
-                  ),
-                  TextInputField(
-                    controller: passwordController,
-                    textPlaceHolder: 'Password',
-                    textInputType: TextInputType.text,
-                    obscureText: true,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 55,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff273E47),
-                        borderRadius: BorderRadius.circular(6),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 10,
-                          )
-                        ],
-                      ),
-                      child: Text(
-                        'Sign In',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const SocialMedia(),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    height: 50,
-                    color: Colors.white,
-                    alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: const Color(0xff273E47),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Don\'t have an account?'),
-                        const SizedBox(
-                          width: 10,
+                        Container(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                              'assets/images/login-signup-logo.png'),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            print('Sign up');
-                          },
-                          child: Text(
-                            'Sign Up',
-                            style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Login to your Account',
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    height: 0,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        TextInputField(
+                          controller: usernameController,
+                          textPlaceHolder: 'Username',
+                          obscureText: false,
+                          textInputType: TextInputType.text,
+                        ),
+                        const SizedBox(
+                          height: 7,
+                        ),
+                        PasswordInputField(
+                          controller: passwordController,
+                          textPlaceHolder: 'Password',
+                          textInputType: TextInputType.text,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xffD8973C),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            elevation: 10,
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 40,
+                            child: Text(
+                              'Sign In',
+                              style: GoogleFonts.inter(
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                                color: Color(0xff273E47),
+                                color: Colors.white,
                               ),
                             ),
                           ),
                         ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        const SocialMedia(),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          height: 50,
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Don\'t have an account?',
+                                style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CreateAccountOptionsPage(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Sign Up',
+                                  style: GoogleFonts.inter(
+                                    textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Color(0xffD8C99B),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

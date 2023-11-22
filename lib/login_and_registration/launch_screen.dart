@@ -9,7 +9,7 @@ class LaunchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 2), () {
-      Get.to(UserLoginPage());
+      Get.to(() => UserLoginPage());
     });
     return Scaffold(
       backgroundColor: const Color(0xff273E47),
