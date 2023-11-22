@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../app_styles.dart';
 import '../sidebar/car-owner_sidebar_card.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -6,7 +7,6 @@ import '../sidebar/sidebar_button.dart';
 import '../size_config.dart';
 import 'car-owner-event.dart';
 import 'service_provider_card.dart';
-import 'service_provider_details.dart';
 
 class CarOwnerBookMaintenancePage extends StatefulWidget {
   const CarOwnerBookMaintenancePage({super.key});
@@ -17,7 +17,14 @@ class CarOwnerBookMaintenancePage extends StatefulWidget {
 
 class _CarOwnerBookMaintenancePageState
     extends State<CarOwnerBookMaintenancePage> {
-  String? _selectedServiceProvider; //slekted
+  //sselected service provider diri
+  String? _selectedServiceProvider;
+  String? _selectedServiceProviderPhoto;
+  String? _selectedServiceProviderEmail;
+  String? _selectedServiceProviderPhoneNumber;
+  String? _selectedServiceProviderLocation;
+  double? _selectedServiceProviderRating;
+
   TimeOfDay? _selectedTime; //time
   late final ValueNotifier<TimeOfDay?> _selectedTimeNotifier;
 //time
@@ -28,7 +35,6 @@ class _CarOwnerBookMaintenancePageState
   Map<DateTime, List<AppointmentEvent>> appointmentEvents = {};
   Map<DateTime, List<MaintenanceSchedule>> MaintenanceEvents = {};
   TextEditingController _eventController = TextEditingController();
-  TextEditingController _eventDescriptionController = TextEditingController();
 
   late final ValueNotifier<List<Event>> _selectedEvents;
 
@@ -92,7 +98,7 @@ class _CarOwnerBookMaintenancePageState
                   Expanded(
                     child: Center(
                       child: Text(
-                        'Book',
+                        'Book Now',
                         style: tInterRegular.copyWith(
                           fontWeight: FontWeight.w600,
                           color: tWhite,
@@ -212,48 +218,210 @@ class _CarOwnerBookMaintenancePageState
                                     ),
                                     child: ListTile(
                                       onTap: () => print(""),
-                                      title: Column(
+                                      title: Row(
                                         children: [
-                                          Text(
-                                            '${event.eventType}',
-                                            style: tInterBold.copyWith(
-                                                color: tWhite,
-                                                fontSize: SizeConfig
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: SizeConfig
+                                                        .blockSizeVertical! *
+                                                    10,
+                                                height: SizeConfig
                                                         .blockSizeHorizontal! *
-                                                    5),
-                                          ),
-                                          Text(
-                                            '${event.serviceProviderName}',
-                                            style: tInterMedium.copyWith(
-                                                color: tWhite,
-                                                fontSize: SizeConfig
+                                                    10,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: DecorationImage(
+                                                    image: Image.asset(event
+                                                            .serviceProviderPhoto)
+                                                        .image,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: tWhite
+                                                          .withOpacity(0.051),
+                                                      offset: const Offset(
+                                                          0.0, 3.0),
+                                                      blurRadius: 15.0,
+                                                      spreadRadius: 2.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment(0.4, -1.2),
+                                                  child: Container(
+                                                    width: SizeConfig
+                                                            .blockSizeHorizontal! *
+                                                        2,
+                                                    height: SizeConfig
+                                                            .blockSizeVertical! *
+                                                        2,
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: Colors.green,
+                                                        border: Border.all(
+                                                            width: 0.8,
+                                                            color:
+                                                                Colors.black)),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              2.0),
+                                                      child: Container(
+                                                        width: SizeConfig
+                                                                .blockSizeHorizontal! *
+                                                            1,
+                                                        height: SizeConfig
+                                                                .blockSizeVertical! *
+                                                            1,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              RatingBar.builder(
+                                                initialRating: event.rating,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemSize: SizeConfig
                                                         .blockSizeHorizontal! *
-                                                    4.5),
+                                                    3,
+                                                itemPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 0.0),
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: tOrange,
+                                                ),
+                                                ignoreGestures: true,
+                                                onRatingUpdate: (rating) {
+                                                  print(rating);
+                                                },
+                                              ),
+                                              Text(
+                                                '${event.serviceProviderName}',
+                                                style: tInterBold.copyWith(
+                                                    color: tWhite,
+                                                    fontSize: SizeConfig
+                                                            .blockSizeHorizontal! *
+                                                        3.5),
+                                              ),
+                                              Text(
+                                                '${event.phoneNumber}',
+                                                style: tInterMedium.copyWith(
+                                                    color: tWhite,
+                                                    fontSize: SizeConfig
+                                                            .blockSizeHorizontal! *
+                                                        2),
+                                              ),
+                                              Text(
+                                                '${event.email}',
+                                                style: tInterMedium.copyWith(
+                                                    color: tWhite,
+                                                    fontSize: SizeConfig
+                                                            .blockSizeHorizontal! *
+                                                        2),
+                                              ),
+                                            ],
                                           ),
-                                          Text(
-                                            '${event.bookingDescription}',
-                                            style: tInterBold.copyWith(
-                                                color: tWhite,
-                                                fontSize: SizeConfig
-                                                        .blockSizeHorizontal! *
-                                                    4.5),
+                                          SizedBox(
+                                            width: 4,
                                           ),
-                                          Text(
-                                            'Time: ${event.bookingTime.format(context)}',
-                                            style: tInterMedium.copyWith(
-                                              color: tWhite,
-                                              fontSize: SizeConfig
-                                                      .blockSizeHorizontal! *
-                                                  4.5,
+                                          Container(
+                                            width: 2,
+                                            child: SizedBox(
+                                              height: SizeConfig
+                                                      .blockSizeVertical! *
+                                                  12,
                                             ),
+                                            decoration: BoxDecoration(
+                                                color: tButterscotch),
                                           ),
-                                          Text(
-                                            'Status: ${getBookingStatusString(event.bookingStatus)}',
-                                            style: tInterMedium.copyWith(
-                                                color: tWhite,
-                                                fontSize: SizeConfig
+                                          SizedBox(
+                                            width: 4,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '${event.eventType}'
+                                                    .toUpperCase(),
+                                                style: tInterBold.copyWith(
+                                                    color: tWhite,
+                                                    fontSize: SizeConfig
+                                                            .blockSizeHorizontal! *
+                                                        4),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                              ),
+                                              Container(
+                                                width: SizeConfig
                                                         .blockSizeHorizontal! *
-                                                    4.5),
+                                                    45,
+                                                child: Text(
+                                                  '${event.bookingDescription}',
+                                                  style: tInterBold.copyWith(
+                                                      color: tWhite,
+                                                      fontSize: SizeConfig
+                                                              .blockSizeHorizontal! *
+                                                          3),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Time: ${event.bookingTime.format(context)}',
+                                                style: tInterMedium.copyWith(
+                                                  color: tWhite,
+                                                  fontSize: SizeConfig
+                                                          .blockSizeHorizontal! *
+                                                      3,
+                                                ),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                              ),
+                                              Text(
+                                                'Status: ${getBookingStatusString(event.bookingStatus)}',
+                                                style: tInterMedium.copyWith(
+                                                    color: tWhite,
+                                                    fontSize: SizeConfig
+                                                            .blockSizeHorizontal! *
+                                                        3),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                              ),
+                                              Container(
+                                                width: SizeConfig
+                                                        .blockSizeHorizontal! *
+                                                    45,
+                                                child: Text(
+                                                  'Location: ${event.location}',
+                                                  style: tInterMedium.copyWith(
+                                                      color: tWhite,
+                                                      fontSize: SizeConfig
+                                                              .blockSizeHorizontal! *
+                                                          3),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -326,12 +494,11 @@ class _CarOwnerBookMaintenancePageState
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Select Service Provider",
-                            style: tInterSemiBold.copyWith(
-                                fontSize:
-                                    SizeConfig.blockSizeHorizontal! * 3.5)),
+                        Text("Select Service Provider:",
+                            style: tInterBold.copyWith(
+                                fontSize: SizeConfig.blockSizeHorizontal! * 4)),
                         Container(
-                          height: SizeConfig.blockSizeVertical! * 15,
+                          height: SizeConfig.blockSizeVertical! * 16,
                           child: ListView(
                             children: [
                               ServiceProviderCard(
@@ -344,11 +511,13 @@ class _CarOwnerBookMaintenancePageState
                                 phoneNumber: '+123 456 7890',
                                 location: "San Fernando City, Cebu",
                                 certifications: [
-                                  'Certification1',
-                                  'Certification2',
-                                  'Certification3'
+                                  'assets/images/cert2.png',
+                                  'assets/images/cert1.png',
+                                  'assets/images/cert1.png'
                                 ],
                                 rating: 4.5,
+                                isSelected:
+                                    'Manoy Mexl' == _selectedServiceProvider,
                                 onServiceProviderSelected:
                                     _updateSelectedServiceProvider,
                               ),
@@ -362,30 +531,31 @@ class _CarOwnerBookMaintenancePageState
                                 phoneNumber: '+456 123 0987',
                                 location: "Argao City, Cebu",
                                 certifications: [
-                                  'Certification1',
-                                  'Certification2',
-                                  'Certification3'
+                                  'assets/images/cert1.png',
+                                  'assets/images/cert2.png',
+                                  'assets/images/cert1.png'
                                 ],
                                 rating: 3.5,
+                                isSelected:
+                                    'Machew D Alcs' == _selectedServiceProvider,
                                 onServiceProviderSelected:
                                     _updateSelectedServiceProvider,
                               ),
                             ],
                           ),
                         ),
-                        Text(
-                          'Selected Service Provider: ${_selectedServiceProvider ?? ""}',
-                          style: tInterSemiBold.copyWith(
-                            fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
-                          ),
+                        SizedBox(
+                          height: 4,
                         ),
-
                         ElevatedButton(
                           onPressed: () {
                             // When the button is pressed, show the time picker
                             _selectTime(context);
                           },
-                          child: Text("Select Time"),
+                          child: Text(
+                            "Select Time",
+                            style: tInterMedium,
+                          ),
                         ),
                         ValueListenableBuilder<TimeOfDay?>(
                           valueListenable: _selectedTimeNotifier,
@@ -411,10 +581,6 @@ class _CarOwnerBookMaintenancePageState
                                       SizeConfig.blockSizeHorizontal! * 3.5)),
                           controller: _eventController,
                         ),
-                        // TextField(
-                        //   decoration: InputDecoration(labelText: "Description"),
-                        //   controller: _eventDescriptionController,
-                        // ),
                       ],
                     ),
                   ],
@@ -434,12 +600,19 @@ class _CarOwnerBookMaintenancePageState
                 onPressed: () {
                   DateTime selectedDay = _selectedDay!;
                   Event newAppointment = Event(
+                    eventType: 'appointment',
                     serviceProviderName: _selectedServiceProvider ?? '',
+                    serviceProviderPhoto: _selectedServiceProviderPhoto ?? '',
+                    email: _selectedServiceProviderEmail ?? '',
+                    phoneNumber: _selectedServiceProviderPhoneNumber ?? '',
+                    location: _selectedServiceProviderLocation ?? '',
+                    rating: _selectedServiceProviderRating ?? 0.0,
                     bookingDescription: _eventController.text,
                     bookingTime:
                         _selectedTime ?? TimeOfDay(hour: 12, minute: 0),
                     bookingStatus: BookingStatus.pending,
                   );
+
                   if (events.containsKey(selectedDay)) {
                     events[selectedDay]!.add(newAppointment);
                   } else {
@@ -461,9 +634,24 @@ class _CarOwnerBookMaintenancePageState
     );
   }
 
-  void _updateSelectedServiceProvider(String serviceProviderName) {
+  void _updateSelectedServiceProvider(
+      String serviceProviderName,
+      String serviceProviderPhoto,
+      String email,
+      String phoneNumber,
+      String location,
+      double rating) {
     setState(() {
-      _selectedServiceProvider = serviceProviderName;
+      if (_selectedServiceProvider == serviceProviderName) {
+        _selectedServiceProvider = null; // Deselect if already selected
+      } else {
+        _selectedServiceProvider = serviceProviderName; // Select the new one
+        _selectedServiceProviderPhoto = serviceProviderPhoto;
+        _selectedServiceProviderEmail = email;
+        _selectedServiceProviderPhoneNumber = phoneNumber;
+        _selectedServiceProviderLocation = location;
+        _selectedServiceProviderRating = rating;
+      }
     });
   }
 
@@ -492,144 +680,6 @@ class _CarOwnerBookMaintenancePageState
     );
   }
 }
-
-// void _showAppointmentForm() {
-//   showDialog(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return AlertDialog(
-//         title: Text("Add Appointment"),
-//         content: Padding(
-//           padding: const EdgeInsets.all(4.0),
-//           child: Container(
-//             height: SizeConfig.blockSizeVertical! * 50,
-//             child: SingleChildScrollView(
-//               child: Column(
-//                 children: [
-//                   Column(
-//                     mainAxisAlignment: MainAxisAlignment.start,
-//                     children: [
-//                       Text("Select Service Provider",
-//                           style: tInterSemiBold.copyWith(
-//                               fontSize:
-//                                   SizeConfig.blockSizeHorizontal! * 3.5)),
-//                       Container(
-//                         height: SizeConfig.blockSizeVertical! * 15,
-//                         child: ListView(
-//                           children: [
-//                             ServiceProviderCard(
-//                               serviceProviderName: 'Manoy Mexl',
-//                               serviceProviderPhoto:
-//                                   'assets/images/meksel.jpg',
-//                               serviceProviderSpecialties:
-//                                   'Fixing Tires, Fixing Batteries',
-//                               email: 'ManoyMexl@sample.com',
-//                               phoneNumber: '+123 456 7890',
-//                               location: "San Fernando City, Cebu",
-//                               certifications: [
-//                                 'Certification1',
-//                                 'Certification2',
-//                                 'Certification3'
-//                               ],
-//                               rating: 4.5,
-//                             ),
-//                             ServiceProviderCard(
-//                               serviceProviderName: 'Machew D Alcs',
-//                               serviceProviderPhoto:
-//                                   'assets/images/machew.png',
-//                               serviceProviderSpecialties:
-//                                   'Repairs Breaks, Suspensions and many other technicalities',
-//                               email: 'machewdalcs@sample.com',
-//                               phoneNumber: '+456 123 0987',
-//                               location: "Argao City, Cebu",
-//                               certifications: [
-//                                 'Certification1',
-//                                 'Certification2',
-//                                 'Certification3'
-//                               ],
-//                               rating: 3.5,
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-
-//                       ElevatedButton(
-//                         onPressed: () {
-//                           // When the button is pressed, show the time picker
-//                           _selectTime(context);
-//                         },
-//                         child: Text("Select Time"),
-//                       ),
-//                       ValueListenableBuilder<TimeOfDay?>(
-//                         valueListenable: _selectedTimeNotifier,
-//                         builder: (context, selectedTime, _) {
-//                           if (selectedTime != null) {
-//                             return Text(
-//                               'Selected Time: ${selectedTime.format(context)}',
-//                               style: tInterSemiBold.copyWith(
-//                                 fontSize:
-//                                     SizeConfig.blockSizeHorizontal! * 3.5,
-//                               ),
-//                             );
-//                           } else {
-//                             return Container(); // Return an empty container if no time is selected
-//                           }
-//                         },
-//                       ),
-//                       TextField(
-//                         decoration: InputDecoration(
-//                             labelText: "Appointment Description",
-//                             labelStyle: tInterSemiBold.copyWith(
-//                                 fontSize:
-//                                     SizeConfig.blockSizeHorizontal! * 3.5)),
-//                         controller: _eventController,
-//                       ),
-//                       // TextField(
-//                       //   decoration: InputDecoration(labelText: "Description"),
-//                       //   controller: _eventDescriptionController,
-//                       // ),
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ),
-//         actions: [
-//           ElevatedButton(
-//               style: ElevatedButton.styleFrom(
-//                 backgroundColor: tOrange,
-//                 foregroundColor: Colors.white,
-//                 shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.circular(24),
-//                 ),
-//               ),
-//               onPressed: () {
-//                 DateTime selectedDay = _selectedDay!;
-//                 if (events.containsKey(selectedDay)) {
-//                   events[selectedDay]!.add(
-//                     Event(_eventController.text,
-//                         _eventDescriptionController.text),
-//                   );
-//                 } else {
-//                   events[selectedDay] = [
-//                     Event(_eventController.text,
-//                         _eventDescriptionController.text),
-//                   ];
-//                 }
-//                 setState(() {
-//                   _selectedDay = selectedDay;
-//                   _selectedEvents.value = _getEventsForDay(selectedDay);
-//                 });
-
-//                 Navigator.of(context).pop();
-//               },
-//               child: Text("Add Appointment")),
-//         ],
-//       );
-//     },
-//   );
-// }
 
 String getBookingStatusString(BookingStatus status) {
   switch (status) {

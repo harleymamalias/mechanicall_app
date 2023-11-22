@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 class Event {
   String eventType;
   String serviceProviderName;
+  String serviceProviderPhoto;
+  String email;
+  String phoneNumber;
+  String location;
+  double rating;
   String bookingDescription;
   TimeOfDay bookingTime;
   BookingStatus bookingStatus;
@@ -10,6 +15,11 @@ class Event {
   Event({
     this.eventType = "Appointment",
     this.serviceProviderName = '',
+    this.serviceProviderPhoto = '',
+    this.email = '',
+    this.phoneNumber = '',
+    this.location = '',
+    this.rating = 3,
     this.bookingDescription = '',
     this.bookingTime = const TimeOfDay(hour: 12, minute: 0),
     this.bookingStatus = BookingStatus.pending,
