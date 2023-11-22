@@ -26,8 +26,7 @@ class _CarOwnerBookMaintenancePageState
   double? _selectedServiceProviderRating;
 
   TimeOfDay? _selectedTime; //time
-  late final ValueNotifier<TimeOfDay?> _selectedTimeNotifier;
-//time
+  late final ValueNotifier<TimeOfDay?> _selectedTimeNotifier; //time
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -197,220 +196,217 @@ class _CarOwnerBookMaintenancePageState
                                 itemCount: value.length,
                                 itemBuilder: (context, index) {
                                   Event event = value[index];
-                                  return Container(
-                                    margin: EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.bottomCenter,
-                                        end: Alignment.topCenter,
-                                        colors: [tCharcoal, Color(0xff125670)],
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color:
-                                              Colors.black.withOpacity(0.170),
-                                          offset: const Offset(0.0, 3.0),
-                                          blurRadius: 15.0,
-                                          spreadRadius: 2.0,
+                                  return GestureDetector(
+                                    onLongPress: () {
+                                      _showAppointmentDetailsDialog(
+                                          context, event);
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.topCenter,
+                                          colors: [
+                                            tCharcoal,
+                                            Color(0xff125670)
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                    child: ListTile(
-                                      onTap: () => print(""),
-                                      title: Row(
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                width: SizeConfig
-                                                        .blockSizeVertical! *
-                                                    10,
-                                                height: SizeConfig
-                                                        .blockSizeHorizontal! *
-                                                    10,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                    image: Image.asset(event
-                                                            .serviceProviderPhoto)
-                                                        .image,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: tWhite
-                                                          .withOpacity(0.051),
-                                                      offset: const Offset(
-                                                          0.0, 3.0),
-                                                      blurRadius: 15.0,
-                                                      spreadRadius: 2.0,
+                                        borderRadius: BorderRadius.circular(12),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.170),
+                                            offset: const Offset(0.0, 3.0),
+                                            blurRadius: 15.0,
+                                            spreadRadius: 2.0,
+                                          ),
+                                        ],
+                                      ),
+                                      child: ListTile(
+                                        onTap: () => print(""),
+                                        title: Row(
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  width: SizeConfig
+                                                          .blockSizeVertical! *
+                                                      10,
+                                                  height: SizeConfig
+                                                          .blockSizeHorizontal! *
+                                                      10,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                      image: Image.asset(event
+                                                              .serviceProviderPhoto)
+                                                          .image,
+                                                      fit: BoxFit.cover,
                                                     ),
-                                                  ],
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      Alignment(0.4, -1.2),
-                                                  child: Container(
-                                                    width: SizeConfig
-                                                            .blockSizeHorizontal! *
-                                                        2,
-                                                    height: SizeConfig
-                                                            .blockSizeVertical! *
-                                                        2,
-                                                    decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color: Colors.green,
-                                                        border: Border.all(
-                                                            width: 0.8,
-                                                            color:
-                                                                Colors.black)),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              2.0),
-                                                      child: Container(
-                                                        width: SizeConfig
-                                                                .blockSizeHorizontal! *
-                                                            1,
-                                                        height: SizeConfig
-                                                                .blockSizeVertical! *
-                                                            1,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                shape: BoxShape
-                                                                    .circle),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: tWhite
+                                                            .withOpacity(0.051),
+                                                        offset: const Offset(
+                                                            0.0, 3.0),
+                                                        blurRadius: 15.0,
+                                                        spreadRadius: 2.0,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: Align(
+                                                    alignment:
+                                                        Alignment(0.4, -1.2),
+                                                    child: Container(
+                                                      width: SizeConfig
+                                                              .blockSizeHorizontal! *
+                                                          2,
+                                                      height: SizeConfig
+                                                              .blockSizeVertical! *
+                                                          2,
+                                                      decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color: Colors.green,
+                                                          border: Border.all(
+                                                              width: 0.8,
+                                                              color: Colors
+                                                                  .black)),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(2.0),
+                                                        child: Container(
+                                                          width: SizeConfig
+                                                                  .blockSizeHorizontal! *
+                                                              1,
+                                                          height: SizeConfig
+                                                                  .blockSizeVertical! *
+                                                              1,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              RatingBar.builder(
-                                                initialRating: event.rating,
-                                                minRating: 1,
-                                                direction: Axis.horizontal,
-                                                allowHalfRating: true,
-                                                itemCount: 5,
-                                                itemSize: SizeConfig
-                                                        .blockSizeHorizontal! *
-                                                    3,
-                                                itemPadding:
-                                                    EdgeInsets.symmetric(
-                                                        horizontal: 0.0),
-                                                itemBuilder: (context, _) =>
-                                                    Icon(
-                                                  Icons.star,
-                                                  color: tOrange,
+                                                RatingBar.builder(
+                                                  initialRating: event.rating,
+                                                  minRating: 1,
+                                                  direction: Axis.horizontal,
+                                                  allowHalfRating: true,
+                                                  itemCount: 5,
+                                                  itemSize: SizeConfig
+                                                          .blockSizeHorizontal! *
+                                                      3,
+                                                  itemPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 0.0),
+                                                  itemBuilder: (context, _) =>
+                                                      Icon(
+                                                    Icons.star,
+                                                    color: tOrange,
+                                                  ),
+                                                  ignoreGestures: true,
+                                                  onRatingUpdate: (rating) {
+                                                    print(rating);
+                                                  },
                                                 ),
-                                                ignoreGestures: true,
-                                                onRatingUpdate: (rating) {
-                                                  print(rating);
-                                                },
-                                              ),
-                                              Text(
-                                                '${event.serviceProviderName}',
-                                                style: tInterBold.copyWith(
-                                                    color: tWhite,
-                                                    fontSize: SizeConfig
-                                                            .blockSizeHorizontal! *
-                                                        3.5),
-                                              ),
-                                              Text(
-                                                '${event.phoneNumber}',
-                                                style: tInterMedium.copyWith(
-                                                    color: tWhite,
-                                                    fontSize: SizeConfig
-                                                            .blockSizeHorizontal! *
-                                                        2),
-                                              ),
-                                              Text(
-                                                '${event.email}',
-                                                style: tInterMedium.copyWith(
-                                                    color: tWhite,
-                                                    fontSize: SizeConfig
-                                                            .blockSizeHorizontal! *
-                                                        2),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Container(
-                                            width: 2,
-                                            child: SizedBox(
-                                              height: SizeConfig
-                                                      .blockSizeVertical! *
-                                                  12,
-                                            ),
-                                            decoration: BoxDecoration(
-                                                color: tButterscotch),
-                                          ),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                '${event.eventType}'
-                                                    .toUpperCase(),
-                                                style: tInterBold.copyWith(
-                                                    color: tWhite,
-                                                    fontSize: SizeConfig
-                                                            .blockSizeHorizontal! *
-                                                        4),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                              ),
-                                              Container(
-                                                width: SizeConfig
-                                                        .blockSizeHorizontal! *
-                                                    45,
-                                                child: Text(
-                                                  '${event.bookingDescription}',
+                                                Text(
+                                                  '${event.serviceProviderName}',
                                                   style: tInterBold.copyWith(
                                                       color: tWhite,
                                                       fontSize: SizeConfig
                                                               .blockSizeHorizontal! *
-                                                          3),
+                                                          3.5),
+                                                ),
+                                                Text(
+                                                  '${event.phoneNumber}',
+                                                  style: tInterMedium.copyWith(
+                                                      color: tWhite,
+                                                      fontSize: SizeConfig
+                                                              .blockSizeHorizontal! *
+                                                          2),
+                                                ),
+                                                Text(
+                                                  '${event.email}',
+                                                  style: tInterMedium.copyWith(
+                                                      color: tWhite,
+                                                      fontSize: SizeConfig
+                                                              .blockSizeHorizontal! *
+                                                          2),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Container(
+                                              width: 2,
+                                              child: SizedBox(
+                                                height: SizeConfig
+                                                        .blockSizeVertical! *
+                                                    12,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                  color: tButterscotch),
+                                            ),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '${event.eventType}'
+                                                      .toUpperCase(),
+                                                  style: tInterBold.copyWith(
+                                                      color: tWhite,
+                                                      fontSize: SizeConfig
+                                                              .blockSizeHorizontal! *
+                                                          4),
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 1,
                                                 ),
-                                              ),
-                                              Text(
-                                                'Time: ${event.bookingTime.format(context)}',
-                                                style: tInterMedium.copyWith(
-                                                  color: tWhite,
-                                                  fontSize: SizeConfig
+                                                Container(
+                                                  width: SizeConfig
                                                           .blockSizeHorizontal! *
-                                                      3,
+                                                      45,
+                                                  child: Text(
+                                                    '${event.bookingDescription}',
+                                                    style: tInterBold.copyWith(
+                                                        color: tWhite,
+                                                        fontSize: SizeConfig
+                                                                .blockSizeHorizontal! *
+                                                            3),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                  ),
                                                 ),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                              ),
-                                              Text(
-                                                'Status: ${getBookingStatusString(event.bookingStatus)}',
-                                                style: tInterMedium.copyWith(
+                                                Text(
+                                                  'Time: ${event.bookingTime.format(context)}',
+                                                  style: tInterMedium.copyWith(
                                                     color: tWhite,
                                                     fontSize: SizeConfig
                                                             .blockSizeHorizontal! *
-                                                        3),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                              ),
-                                              Container(
-                                                width: SizeConfig
-                                                        .blockSizeHorizontal! *
-                                                    45,
-                                                child: Text(
-                                                  'Location: ${event.location}',
+                                                        3,
+                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                ),
+                                                Text(
+                                                  'Status: ${getBookingStatusString(event.bookingStatus)}',
                                                   style: tInterMedium.copyWith(
                                                       color: tWhite,
                                                       fontSize: SizeConfig
@@ -420,10 +416,26 @@ class _CarOwnerBookMaintenancePageState
                                                       TextOverflow.ellipsis,
                                                   maxLines: 1,
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                                Container(
+                                                  width: SizeConfig
+                                                          .blockSizeHorizontal! *
+                                                      45,
+                                                  child: Text(
+                                                    'Location: ${event.location}',
+                                                    style: tInterMedium.copyWith(
+                                                        color: tWhite,
+                                                        fontSize: SizeConfig
+                                                                .blockSizeHorizontal! *
+                                                            3),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   );
@@ -549,7 +561,6 @@ class _CarOwnerBookMaintenancePageState
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            // When the button is pressed, show the time picker
                             _selectTime(context);
                           },
                           child: Text(
@@ -569,7 +580,7 @@ class _CarOwnerBookMaintenancePageState
                                 ),
                               );
                             } else {
-                              return Container(); // Return an empty container if no time is selected
+                              return Container();
                             }
                           },
                         ),
@@ -634,6 +645,322 @@ class _CarOwnerBookMaintenancePageState
     );
   }
 
+  void _showAppointmentDetailsDialog(BuildContext context, Event event) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: tCharcoal,
+          title: Text(
+            'Appointment Details',
+            style: tInterBold.copyWith(color: tWhite),
+          ),
+          content: Container(
+            height: SizeConfig.blockSizeVertical! * 40,
+            child: ListView(
+              children: [
+                Container(
+                  width: SizeConfig.blockSizeVertical! * 20,
+                  height: SizeConfig.blockSizeHorizontal! * 20,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: Image.asset(event.serviceProviderPhoto).image,
+                      fit: BoxFit.fitHeight,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: tWhite.withOpacity(0.051),
+                        offset: const Offset(0.0, 3.0),
+                        blurRadius: 15.0,
+                        spreadRadius: 2.0,
+                      ),
+                    ],
+                  ),
+                  child: Align(
+                    alignment: Alignment(0.23, -1.3),
+                    child: Container(
+                      width: SizeConfig.blockSizeHorizontal! * 4,
+                      height: SizeConfig.blockSizeVertical! * 4,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.green,
+                          border: Border.all(width: 0.8, color: Colors.black)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Container(
+                          width: SizeConfig.blockSizeHorizontal! * 1,
+                          height: SizeConfig.blockSizeVertical! * 1,
+                          decoration: BoxDecoration(shape: BoxShape.circle),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Rating: ',
+                      style: tInterBold.copyWith(
+                          color: tWhite,
+                          fontSize: SizeConfig.blockSizeHorizontal! * 3),
+                    ),
+                    RatingBar.builder(
+                      initialRating: event.rating,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemSize: SizeConfig.blockSizeHorizontal! * 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: tOrange,
+                      ),
+                      ignoreGestures: true,
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Service Provider Name: ',
+                          style: tInterBold.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${event.serviceProviderName}',
+                          style: tInterRegular.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Phone Number: ',
+                          style: tInterBold.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${event.phoneNumber}',
+                          style: tInterRegular.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Email: ',
+                          style: tInterBold.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${event.email}',
+                          style: tInterRegular.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Location: ',
+                          style: tInterBold.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${event.location}',
+                          style: tInterRegular.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  height: SizeConfig.blockSizeVertical! * 0.5,
+                  width: SizeConfig.blockSizeHorizontal! * 0.5,
+                  color: tButterscotch,
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Event Type: ',
+                          style: tInterBold.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${event.eventType}',
+                          style: tInterRegular.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Appointment Description: ',
+                          style: tInterBold.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${event.bookingDescription}',
+                          style: tInterRegular.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Booking Time: ',
+                          style: tInterBold.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${event.bookingTime.format(context)}',
+                          style: tInterRegular.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Booking Status: ',
+                          style: tInterBold.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                        TextSpan(
+                          text:
+                              '${getBookingStatusString(event.bookingStatus)}',
+                          style: tInterRegular.copyWith(
+                            color: tWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: tButterscotch,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Back'),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: tAmaranthPurple,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+              ),
+              onPressed: () {
+                // Remove the appointment from events
+                setState(() {
+                  events[_selectedDay!]!.remove(event);
+                  _selectedEvents.value = _getEventsForDay(_selectedDay!);
+                });
+                Navigator.pop(context);
+              },
+              child: Text('Cancel Request'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _updateSelectedServiceProvider(
       String serviceProviderName,
       String serviceProviderPhoto,
@@ -643,9 +970,9 @@ class _CarOwnerBookMaintenancePageState
       double rating) {
     setState(() {
       if (_selectedServiceProvider == serviceProviderName) {
-        _selectedServiceProvider = null; // Deselect if already selected
+        _selectedServiceProvider = null;
       } else {
-        _selectedServiceProvider = serviceProviderName; // Select the new one
+        _selectedServiceProvider = serviceProviderName;
         _selectedServiceProviderPhoto = serviceProviderPhoto;
         _selectedServiceProviderEmail = email;
         _selectedServiceProviderPhoneNumber = phoneNumber;
@@ -664,7 +991,7 @@ class _CarOwnerBookMaintenancePageState
     if (picked != null && picked != _selectedTime) {
       setState(() {
         _selectedTime = picked;
-        _selectedTimeNotifier.value = picked; // Notify listeners of the change
+        _selectedTimeNotifier.value = picked;
       });
     }
   }
