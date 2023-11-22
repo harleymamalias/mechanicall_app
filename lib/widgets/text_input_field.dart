@@ -19,11 +19,12 @@ class TextInputField extends StatelessWidget {
       padding: const EdgeInsets.only(top: 2, left: 15),
       height: 55,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(6),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 7),
-          ]),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(6),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 7),
+        ],
+      ),
       child: TextFormField(
         controller: controller,
         keyboardType: textInputType,
@@ -32,7 +33,7 @@ class TextInputField extends StatelessWidget {
           hintText: textPlaceHolder,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.all(0),
-          hintStyle: GoogleFonts.poppins(
+          hintStyle: GoogleFonts.inter(
             textStyle: const TextStyle(
               fontSize: 14,
               height: 1,

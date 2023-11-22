@@ -13,9 +13,9 @@ class SocialMedia extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.6,
           child: Text(
             '-Or Sign In with-',
-            style: GoogleFonts.poppins(
-              fontSize: 12,
-              color: Colors.grey,
+            style: GoogleFonts.inter(
+              fontSize: 13,
+              color: const Color.fromARGB(255, 228, 222, 222),
             ),
           ),
         ),
@@ -26,13 +26,12 @@ class SocialMedia extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
-              onTap: (){},
+              onTap: () {},
               child: Container(
                 alignment: Alignment.center,
                 height: 40,
                 width: 70,
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(
@@ -43,7 +42,7 @@ class SocialMedia extends StatelessWidget {
                 ),
                 child: Image.asset(
                   'assets/images/google.png',
-                  height: 30,
+                  height: 50,
                 ),
               ),
             ),
@@ -57,7 +56,6 @@ class SocialMedia extends StatelessWidget {
                 height: 40,
                 width: 70,
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(
@@ -68,7 +66,7 @@ class SocialMedia extends StatelessWidget {
                 ),
                 child: Image.asset(
                   'assets/images/facebook.png',
-                  height: 30,
+                  height: 50,
                 ),
               ),
             ),
