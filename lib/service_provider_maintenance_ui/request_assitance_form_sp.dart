@@ -11,7 +11,7 @@ class RequestAssistanceFormServiceProvider extends StatelessWidget {
       backgroundColor: const Color(0xff273E47),
       appBar: AppBar(
         title: Text(
-          'Request Assistance Details',
+          'Scheduled Maintenance Details',
           style: GoogleFonts.inter(
             textStyle: const TextStyle(
               fontWeight: FontWeight.w700,
@@ -43,7 +43,7 @@ class RequestAssistanceFormServiceProvider extends StatelessWidget {
                     height: 15,
                   ),
                   const Text(
-                    'Request Assistance Details',
+                    'Scheduled Maintenance Details',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 17,
@@ -118,7 +118,7 @@ class RequestAssistanceFormServiceProvider extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Service Request ID',
+                        'Scheduled Maintenance ID',
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontWeight: FontWeight.w300,
@@ -202,7 +202,7 @@ class RequestAssistanceFormServiceProvider extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Request Description',
+                        'Maintenance Description',
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontWeight: FontWeight.w300,
@@ -237,7 +237,7 @@ class RequestAssistanceFormServiceProvider extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Request Status',
+                        'Maintenance Status',
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontWeight: FontWeight.w300,
@@ -334,31 +334,6 @@ class RequestAssistanceFormServiceProvider extends StatelessWidget {
                   ),
                   const SizedBox(
                     height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Estimated Time of Arrival: ',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '15 mins',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),

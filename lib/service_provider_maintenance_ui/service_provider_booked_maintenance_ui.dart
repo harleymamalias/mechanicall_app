@@ -259,7 +259,7 @@ class _ServiceProviderBookedMaintenanceUIState
 
                 Navigator.pop(context);
               },
-              child: Text('Decline Request'),
+              child: Text('Cancel Request'),
             ),
             SizedBox(
               height: 8,
@@ -273,11 +273,10 @@ class _ServiceProviderBookedMaintenanceUIState
                 ),
               ),
               onPressed: () {
-                // Remove the appointment from events
 
                 Navigator.pop(context);
               },
-              child: Text('Confirm Request'),
+              child: Text('Complete Request'),
             ),
           ],
         );
