@@ -239,6 +239,13 @@ class _CarOwnerBookMaintenancePageState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: tCharcoal,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
                           onPressed: () {
                             Navigator.pop(context);
                             _showAppointmentForm();
@@ -246,6 +253,13 @@ class _CarOwnerBookMaintenancePageState
                           child: Text("Appointment"),
                         ),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: tEcru,
+                            foregroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
                           onPressed: () {
                             Navigator.pop(context);
                             _showMaintenanceForm();
