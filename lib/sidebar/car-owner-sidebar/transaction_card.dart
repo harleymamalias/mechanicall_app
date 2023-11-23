@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../app_styles.dart';
-import '../size_config.dart';
-import 's-p_transaction_details.dart';
+import '../../app_styles.dart';
+import '../../size_config.dart';
+import 'car-owner_rate_s_provider.dart';
+import 'transaction_details_page.dart';
 
-class ServiceProviderTransactionCard extends StatelessWidget {
+class TransactionCard extends StatelessWidget {
   final String eventType;
   final String date;
   final String serviceDetails;
@@ -12,7 +13,7 @@ class ServiceProviderTransactionCard extends StatelessWidget {
   final String vehicleMake;
   final String vehicleModel;
 
-  ServiceProviderTransactionCard({
+  TransactionCard({
     required this.eventType,
     required this.date,
     required this.serviceDetails,
@@ -37,7 +38,22 @@ class ServiceProviderTransactionCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => transactionDetails(
+                  eventType: eventType,
+                  date: date,
+                  serviceDetails: serviceDetails,
+                  serviceProviderName: serviceProviderName,
+                  vehicleImage: vehicleImage,
+                  vehicleMake: vehicleMake,
+                  vehicleModel: vehicleModel,
+                ),
+              ),
+            );
+          },
           child: Column(
             children: [
               Container(
@@ -216,21 +232,16 @@ class ServiceProviderTransactionCard extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    ServiceProviderTransactionDetails(
+                                builder: (context) => RatingPage(
                                   eventType: eventType,
-                                  date: date,
-                                  serviceDetails: serviceDetails,
                                   serviceProviderName: serviceProviderName,
                                   vehicleImage: vehicleImage,
-                                  vehicleMake: vehicleMake,
-                                  vehicleModel: vehicleModel,
                                 ),
                               ),
                             );
                           },
                           child: Text(
-                            "View Details",
+                            "Rate Service Provider",
                             style: tInterSemiBold.copyWith(
                               color: tAlloyOrange,
                               fontSize: SizeConfig.blockSizeVertical! * 2,

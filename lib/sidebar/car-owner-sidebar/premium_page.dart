@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../app_styles.dart';
-import '../size_config.dart';
-import '../sidebar/premium_card.dart';
+import '../../app_styles.dart';
+import '../../size_config.dart';
+import 'premium_card.dart';
 
 class PremiumServicesPage extends StatelessWidget {
   @override

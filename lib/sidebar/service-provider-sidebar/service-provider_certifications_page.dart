@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../app_styles.dart';
-import '../size_config.dart';
-import '../sidebar/vehicle_card.dart';
-// import 'package:file_picker/file_picker.dart';
+import '../../app_styles.dart';
+import '../../size_config.dart';
+import 'certification_q_card.dart';
 
-class OwnedVehiclesPage extends StatelessWidget {
+class CertificationsQualifications extends StatelessWidget {
+  const CertificationsQualifications({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +19,7 @@ class OwnedVehiclesPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: SizeConfig.blockSizeHorizontal! * 25,
+                    width: SizeConfig.blockSizeHorizontal! * 20,
                     height: SizeConfig.blockSizeVertical! * 7.5,
                     child: GestureDetector(
                       onTap: () {
@@ -34,18 +35,23 @@ class OwnedVehiclesPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Center(
-                    child: Text(
-                      'Owned Vehicles',
-                      style: tInterRegular.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: tCharcoal,
-                        fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                  Container(
+                    width: SizeConfig.blockSizeHorizontal! * 60,
+                    child: Center(
+                      child: Text(
+                        'Certifications & Qualifications',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: tInterRegular.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: tCharcoal,
+                          fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                        ),
                       ),
                     ),
                   ),
                   Container(
-                    width: SizeConfig.blockSizeHorizontal! * 25,
+                    width: SizeConfig.blockSizeHorizontal! * 20,
                     height: SizeConfig.blockSizeVertical! * 7.5,
                   ),
                 ],
@@ -56,27 +62,35 @@ class OwnedVehiclesPage extends StatelessWidget {
               Expanded(
                 child: ListView(
                   children: [
-                    VehicleCard(
-                      imagePath: 'assets/images/civic.jpg',
-                      make: 'Honda',
-                      model: 'Civic',
-                      year: '2022',
-                      licensePlate: 'DEF-456',
+                    CertificationCard(
+                      imagePath: "assets/images/cert1.png",
+                      year: "2018",
                     ),
-                    VehicleCard(
-                      imagePath: 'assets/images/camry.jpg',
-                      make: 'Toyota',
-                      model: 'Camry',
-                      year: '2018',
-                      licensePlate: 'ABC-123',
+                    CertificationCard(
+                      imagePath: "assets/images/cert2.png",
+                      year: "2017",
                     ),
-                    VehicleCard(
-                      imagePath: 'assets/images/mustang.jpg',
-                      make: 'Ford',
-                      model: 'Mustang',
-                      year: '2020',
-                      licensePlate: 'XYZ-789',
-                    ),
+                    // VehicleCard(
+                    //   imagePath: 'assets/images/civic.jpg',
+                    //   make: 'Honda',
+                    //   model: 'Civic',
+                    //   year: '2022',
+                    //   licensePlate: 'DEF-456',
+                    // ),
+                    // VehicleCard(
+                    //   imagePath: 'assets/images/camry.jpg',
+                    //   make: 'Toyota',
+                    //   model: 'Camry',
+                    //   year: '2018',
+                    //   licensePlate: 'ABC-123',
+                    // ),
+                    // VehicleCard(
+                    //   imagePath: 'assets/images/mustang.jpg',
+                    //   make: 'Ford',
+                    //   model: 'Mustang',
+                    //   year: '2020',
+                    //   licensePlate: 'XYZ-789',
+                    // ),
                     SizedBox(
                       height: SizeConfig.blockSizeVertical! * 10,
                     ),
@@ -122,7 +136,7 @@ class _AddVehicleDialogState extends State<AddVehicleDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        "Add Vehicle",
+        "Add Certifications / Qualification",
         style: tInterBold,
       ),
       content: SingleChildScrollView(
@@ -153,28 +167,12 @@ class _AddVehicleDialogState extends State<AddVehicleDialog> {
                   // }
                 },
                 child: Text(
-                  "Choose Vehicle Image",
+                  "Upload Image",
                   style: tInterSemiBold.copyWith(),
                 ),
               ),
             ),
             SizedBox(height: 10),
-            TextField(
-              onChanged: (value) {
-                make = value;
-              },
-              decoration: InputDecoration(
-                labelText: "Make",
-                labelStyle: tInterSemiBold,
-              ),
-            ),
-            TextField(
-              onChanged: (value) {
-                model = value;
-              },
-              decoration: InputDecoration(
-                  labelText: "Model", labelStyle: tInterSemiBold),
-            ),
             SizedBox(
               height: 5,
             ),
@@ -200,15 +198,9 @@ class _AddVehicleDialogState extends State<AddVehicleDialog> {
                   //   currentTime: DateTime.now(),
                   // );
                 },
-                child: Text("Choose Year", style: tInterSemiBold.copyWith()),
+                child: Text("Year of Certification",
+                    style: tInterSemiBold.copyWith()),
               ),
-            ),
-            TextField(
-              onChanged: (value) {
-                licensePlate = value;
-              },
-              decoration: InputDecoration(
-                  labelText: "License Plate", labelStyle: tInterSemiBold),
             ),
           ],
         ),
@@ -234,8 +226,9 @@ class _AddVehicleDialogState extends State<AddVehicleDialog> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("Vehicle Added"),
-                  content: Text("Your vehicle has been added."),
+                  title: Text("Successfully Added"),
+                  content: Text(
+                      "Your Certification / Qualification has been added."),
                   actions: [
                     TextButton(
                       onPressed: () {
@@ -248,8 +241,7 @@ class _AddVehicleDialogState extends State<AddVehicleDialog> {
               },
             );
           },
-          child: Text("Add Vehicle",
-              style: tInterSemiBold.copyWith(color: tWhite)),
+          child: Text("Add", style: tInterSemiBold.copyWith(color: tWhite)),
         ),
       ],
     );

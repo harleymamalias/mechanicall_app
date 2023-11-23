@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../app_styles.dart';
-import '../size_config.dart';
-import '../sidebar/vehicle_details_page.dart';
+import '../../app_styles.dart';
+import '../../size_config.dart';
+import 'vehicle_details_page.dart';
 
 class VehicleCard extends StatelessWidget {
   final String imagePath;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../app_styles.dart';
-import '../size_config.dart';
+import '../../app_styles.dart';
+import '../../size_config.dart';
 
-class ManageServiceProviderProfilePage extends StatelessWidget {
+class ManageProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -137,7 +137,7 @@ class ManageServiceProviderProfilePage extends StatelessWidget {
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
                                               image: AssetImage(
-                                                  'assets/images/meksel.jpg'),
+                                                  'assets/images/harls.jpg'),
                                               fit: BoxFit.cover,
                                             ),
                                             boxShadow: [
@@ -178,7 +178,7 @@ class ManageServiceProviderProfilePage extends StatelessWidget {
                               ),
                               Center(
                                 child: Text(
-                                  'Manoy Mexl',
+                                  'Harley Mamalias',
                                   style: tInterSemiBold.copyWith(
                                     color: tWhite,
                                     fontSize:
@@ -229,7 +229,7 @@ class ManageServiceProviderProfilePage extends StatelessWidget {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 0.0),
                                             child: Text(
-                                              'Service Provider',
+                                              'Premium',
                                               style: tInterSemiBold.copyWith(
                                                 color: tCharcoal,
                                                 fontSize: SizeConfig

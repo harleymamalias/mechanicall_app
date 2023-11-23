@@ -161,7 +161,7 @@ class EventListItem extends StatelessWidget {
                   maxLines: 1,
                 ),
                 Container(
-                  width: SizeConfig.blockSizeHorizontal! * 45,
+                  width: SizeConfig.blockSizeHorizontal! * 40,
                   child: Text(
                     '${bookingDescription}',
                     style: tInterBold.copyWith(
@@ -189,7 +189,7 @@ class EventListItem extends StatelessWidget {
                   maxLines: 1,
                 ),
                 Container(
-                  width: SizeConfig.blockSizeHorizontal! * 45,
+                  width: SizeConfig.blockSizeHorizontal! * 40,
                   child: Text(
                     'Location: ${location}',
                     style: tInterMedium.copyWith(

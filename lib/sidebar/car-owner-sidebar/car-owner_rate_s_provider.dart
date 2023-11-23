@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import '../app_styles.dart';
-import '../size_config.dart';
+import '../../app_styles.dart';
+import '../../size_config.dart';
 
 class RatingPage extends StatefulWidget {
   final String eventType;

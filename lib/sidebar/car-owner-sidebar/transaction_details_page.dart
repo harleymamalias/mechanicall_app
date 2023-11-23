@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
-import '../app_styles.dart';
-import '../size_config.dart';
+import '../../app_styles.dart';
+import '../../size_config.dart';
+import 'car-owner_rate_s_provider.dart';
 
-class VehicleDetails extends StatelessWidget {
-  final String imageUrl;
-  final String make;
-  final String model;
-  final String year;
-  final String licensePlate;
+class transactionDetails extends StatelessWidget {
+  final String eventType;
+  final String date;
+  final String serviceDetails;
+  final String serviceProviderName;
+  final String vehicleImage;
+  final String vehicleMake;
+  final String vehicleModel;
 
-  const VehicleDetails({
-    required this.imageUrl,
-    required this.make,
-    required this.model,
-    required this.year,
-    required this.licensePlate,
+  const transactionDetails({
+    required this.eventType,
+    required this.date,
+    required this.serviceDetails,
+    required this.serviceProviderName,
+    required this.vehicleImage,
+    required this.vehicleMake,
+    required this.vehicleModel,
     Key? key,
   }) : super(key: key);
 
@@ -43,7 +48,7 @@ class VehicleDetails extends StatelessWidget {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(
-                                  imageUrl,
+                                  vehicleImage,
                                 ),
                                 fit: BoxFit.cover)),
                         child: Column(
@@ -82,7 +87,7 @@ class VehicleDetails extends StatelessWidget {
                                   ),
                                   Center(
                                     child: Text(
-                                      'Vehicle Details',
+                                      'My Transactions',
                                       style: tInterBold.copyWith(
                                         color: tWhite,
                                         fontSize:
@@ -130,34 +135,20 @@ class VehicleDetails extends StatelessWidget {
                           height: SizeConfig.blockSizeVertical! * 1,
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(24, 10, 24, 8),
-                          child: RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(children: [
-                                TextSpan(
-                                  text: "$make ",
-                                  style: tInterMedium.copyWith(
-                                    color: tWhite,
-                                    fontSize:
-                                        SizeConfig.blockSizeVertical! * 3.5,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: model,
-                                  style: tInterBold.copyWith(
-                                    color: tWhite,
-                                    fontSize:
-                                        SizeConfig.blockSizeVertical! * 3.5,
-                                  ),
-                                ),
-                              ])),
-                        ),
+                            padding: const EdgeInsets.fromLTRB(24, 10, 24, 8),
+                            child: Text(
+                              eventType,
+                              style: tInterBold.copyWith(
+                                color: tWhite,
+                                fontSize: SizeConfig.blockSizeVertical! * 3.5,
+                              ),
+                            )),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
-                              color: tOrange,
+                              color: tAmaranthPurple,
                             ),
                             height: SizeConfig.blockSizeVertical! * 12,
                             child: Padding(
@@ -172,32 +163,39 @@ class VehicleDetails extends StatelessWidget {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          year,
+                                          vehicleModel,
+                                          textAlign: TextAlign.center,
                                           style: tInterBold.copyWith(
                                             color: tWhite,
                                             fontSize:
                                                 SizeConfig.blockSizeVertical! *
-                                                    2.0,
+                                                    1.7,
                                           ),
                                         ),
                                         Text(
-                                          "Year",
+                                          vehicleMake,
+                                          textAlign: TextAlign.center,
                                           style: tInterRegular.copyWith(
                                             color: tWhite,
                                             fontSize:
                                                 SizeConfig.blockSizeVertical! *
-                                                    2.0,
+                                                    1.5,
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Container(
-                                    width: 1,
-                                    height: SizeConfig.blockSizeVertical! * 5.5,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2),
-                                      color: tGrey2,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: Container(
+                                      width: 1,
+                                      height:
+                                          SizeConfig.blockSizeVertical! * 5.5,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(2),
+                                        color: tGrey2,
+                                      ),
                                     ),
                                   ),
                                   Expanded(
@@ -208,21 +206,66 @@ class VehicleDetails extends StatelessWidget {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          licensePlate,
+                                          date,
+                                          textAlign: TextAlign.center,
                                           style: tInterBold.copyWith(
                                             color: tWhite,
                                             fontSize:
                                                 SizeConfig.blockSizeVertical! *
-                                                    2.0,
+                                                    1.7,
                                           ),
                                         ),
                                         Text(
-                                          "License Plate",
+                                          "Date",
+                                          textAlign: TextAlign.center,
                                           style: tInterRegular.copyWith(
                                             color: tWhite,
                                             fontSize:
                                                 SizeConfig.blockSizeVertical! *
-                                                    2.0,
+                                                    1.5,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: Container(
+                                      width: 1,
+                                      height:
+                                          SizeConfig.blockSizeVertical! * 5.5,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(2),
+                                        color: tGrey2,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          serviceProviderName,
+                                          textAlign: TextAlign.center,
+                                          style: tInterBold.copyWith(
+                                            color: tWhite,
+                                            fontSize:
+                                                SizeConfig.blockSizeVertical! *
+                                                    1.7,
+                                          ),
+                                        ),
+                                        Text(
+                                          "Service Provider",
+                                          textAlign: TextAlign.center,
+                                          style: tInterRegular.copyWith(
+                                            color: tWhite,
+                                            fontSize:
+                                                SizeConfig.blockSizeVertical! *
+                                                    1.5,
                                           ),
                                         ),
                                       ],
@@ -239,7 +282,7 @@ class VehicleDetails extends StatelessWidget {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: 'Tip: ',
+                                  text: 'Service Details: ',
                                   style: tInterBold.copyWith(
                                     color: tWhite,
                                     fontSize:
@@ -247,8 +290,7 @@ class VehicleDetails extends StatelessWidget {
                                   ),
                                 ),
                                 TextSpan(
-                                  text:
-                                      "Enhance your MechaniCALL experience by ensuring your vehicle details are accurate. Easily edit the vehicle image and license plate in the 'Vehicle Details' section. Rest assured, MechaniCALL keeps your license plate information secure, providing you with full control and peace of mind for all your added vehicles.",
+                                  text: serviceDetails,
                                   style: tInterRegular.copyWith(
                                     color: tWhite,
                                     fontSize:
@@ -264,44 +306,38 @@ class VehicleDetails extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: tAmaranthPurple,
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                ),
-                                onPressed: () async {},
-                                child: Icon(
-                                  Icons.delete_rounded,
-                                  size: SizeConfig.blockSizeHorizontal! * 5,
-                                  color: tWhite,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
                               Expanded(
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: tEcru,
+                                    backgroundColor: tOrange,
                                     foregroundColor: Colors.white,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
-                                  onPressed: () async {},
+                                  onPressed: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => RatingPage(
+                                          eventType: eventType,
+                                          serviceProviderName:
+                                              serviceProviderName,
+                                          vehicleImage: vehicleImage,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   child: Center(
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text(
-                                        "Edit License Plate / Photo",
+                                        "Rate Service Provider",
                                         style: tInterBold.copyWith(
                                             color: tWhite,
                                             fontSize:
                                                 SizeConfig.blockSizeVertical! *
-                                                    1.5),
+                                                    2),
                                       ),
                                     ),
                                   ),

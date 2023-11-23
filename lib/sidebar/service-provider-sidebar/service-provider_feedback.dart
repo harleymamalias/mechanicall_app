@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../app_styles.dart';
-import '../size_config.dart';
+import '../../app_styles.dart';
+import '../../size_config.dart';
 import 'service-provider_feedback_card.dart';
 
 class ServiceProviderFeedbacksPage extends StatelessWidget {

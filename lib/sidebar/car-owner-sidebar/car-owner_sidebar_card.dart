@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../app_styles.dart';
-import '../size_config.dart';
-import '../sidebar/car-owner_profile.dart';
-import '../sidebar/car-owner_vehicles.dart';
-import '../sidebar/car-owner_history.dart';
-import '../sidebar/premium_page.dart';
-import '../sidebar/privacy-statement.dart';
-import '../sidebar/report_issue.dart';
-import '../sidebar/car-owner_d_backup.dart';
+import '../../app_styles.dart';
+import '../../size_config.dart';
+import 'car-owner_profile.dart';
+import 'car-owner_vehicles.dart';
+import 'car-owner_history.dart';
+import 'premium_page.dart';
+import '../sidebar-general-pages/privacy-statement.dart';
+import '../sidebar-general-pages/report_issue.dart';
+import '../sidebar-general-pages/data_backup.dart';
 
 class CarOwnerSidebarCard extends StatelessWidget {
   @override

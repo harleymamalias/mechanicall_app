@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_styles.dart';
-import '../sidebar/car-owner_sidebar_card.dart';
+import '../sidebar/car-owner-sidebar/car-owner_sidebar_card.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../sidebar/sidebar_button.dart';
 import '../size_config.dart';
