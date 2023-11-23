@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../sidebar/sidebar_button.dart';
-import '../../sidebar/car-owner-sidebar/car-owner_sidebar_card.dart';
+import '../../sidebar/service-provider-sidebar/service-provider_sidebar_card.dart';
 import 'payment.dart';
 import 'arrival.dart';
 
@@ -86,7 +86,7 @@ class RouteM2 extends StatelessWidget {
           ),
         ],
       ),
-    endDrawer: CarOwnerSidebarCard()
+    endDrawer: ServiceProviderSidebar()
     );
   }
 }

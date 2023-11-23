@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'route2.dart';
 import '../../sidebar/sidebar_button.dart';
-import '../../sidebar/car-owner-sidebar/car-owner_sidebar_card.dart';
+import '../../sidebar/service-provider-sidebar/service-provider_sidebar_card.dart';
 
 class RouteM1 extends StatelessWidget {
   @override
@@ -61,7 +61,7 @@ class RouteM1 extends StatelessWidget {
           ),
         ],
       ),
-    endDrawer: CarOwnerSidebarCard()
+    endDrawer: ServiceProviderSidebar()
     );
   }
 }
