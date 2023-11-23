@@ -61,7 +61,6 @@ class _CarOwnerBookMaintenancePageState
   }
 
   List<Event> _getEventsForDay(DateTime day) {
-    //retrieve all event from the selected day
     return events[day] ?? [];
   }
 

@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'app_styles.dart';
 import 'car-owner_book_maintenance/car-owner_book_maintenance.dart';
@@ -22,19 +23,54 @@ class MyApp extends StatelessWidget {
         // colorScheme: ColorScheme.fromSeed(seedColor: tCharcoal),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: HomeScreen(),
     );
   }
 }
 
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({super.key, required this.title});
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
 
-//   final String title;
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
 
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: [
+          HomePage(),
+          CarOwnerBookMaintenancePage(),
+        ],
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        color: Color(0xff125670),
+        backgroundColor: tCharcoal,
+        items: <Widget>[
+          Icon(
+            Icons.map_outlined,
+            size: 30,
+            color: tWhite,
+          ),
+          Icon(
+            Icons.calendar_month_outlined,
+            size: 30,
+            color: tWhite,
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
+    );
+  }
+}
 
 class HomePage extends StatelessWidget {
   @override
