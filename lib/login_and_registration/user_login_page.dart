@@ -7,6 +7,8 @@ import 'package:mechanicall_app/widgets/input_fields/password_input_field.dart';
 import 'package:mechanicall_app/widgets/social_media.dart';
 import 'package:mechanicall_app/widgets/input_fields/text_input_field.dart';
 
+import '../car_owner_page.dart';
+
 class UserLoginPage extends StatelessWidget {
   UserLoginPage({super.key});
   final TextEditingController usernameController = TextEditingController();
@@ -68,6 +70,157 @@ class UserLoginPage extends StatelessWidget {
                           controller: passwordController,
                           textPlaceHolder: 'Password',
                           textInputType: TextInputType.text,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Login Successful',
+                                    style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  content: Text(
+                                    'Welcome back! Your login was successful.',
+                                    style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                          color: Colors.black, fontSize: 14),
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                HomeScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        'OK',
+                                        style: GoogleFonts.inter(
+                                          textStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xffD8973C),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            elevation: 10,
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 40,
+                            child: Text(
+                              'Login as Vehicle Owner',
+                              style: GoogleFonts.inter(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Login Successful',
+                                    style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  content: Text(
+                                    'Welcome back! Your login was successful.',
+                                    style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                          color: Colors.black, fontSize: 14),
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                HomeScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        'OK',
+                                        style: GoogleFonts.inter(
+                                          textStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xffD8973C),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            elevation: 10,
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 40,
+                            child: Text(
+                              'Login as Service Provider',
+                              style: GoogleFonts.inter(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 10,
@@ -134,7 +287,7 @@ class UserLoginPage extends StatelessWidget {
                             alignment: Alignment.center,
                             height: 40,
                             child: Text(
-                              'Sign In',
+                              'Offline Mode',
                               style: GoogleFonts.inter(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
