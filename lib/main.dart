@@ -5,6 +5,10 @@ import 'sidebar/service-provider-sidebar/service-provider_sidebar_card.dart';
 import 'sidebar/sidebar_button.dart';
 import 'size_config.dart';
 // import 'sidebar/car-owner-sidebar/car-owner_sidebar_card.dart';
+// import 'package:get/get_navigation/get_navigation.dart';
+// import 'package:mechanicall_app/login_and_registration/launch_screen.dart';
+// import 'package:mechanicall_app/payments/arrival_of_mechanic_page.dart';
+// import 'package:mechanicall_app/service_provider_maintenance_ui/maintenance_request_received.dart';
 
 void main() {
   runApp(const MyApp());
@@ -84,5 +88,16 @@ class HomePage extends StatelessWidget {
         ),
         // endDrawer: CarOwnerSidebarCard());
         endDrawer: ServiceProviderSidebar());
+
+        
+    // return GetMaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   title: 'MechaniCALL',
+    //   theme: ThemeData(
+    //     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    //     useMaterial3: true,
+    //   ),
+    //   home: const MaintenanceRequestReceivedPage(),
+    // );
   }
 }
