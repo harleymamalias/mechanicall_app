@@ -4,6 +4,7 @@ import 'package:table_calendar/table_calendar.dart';
 // import 'car-owner_book_maintenance/appointment_functions.dart';
 // import 'size_config.dart';
 // import 'app_styles.dart';
+import '../Mechanic/receive.dart';
 import '../app_styles.dart';
 import '../car-owner_book_maintenance/appointment_functions.dart';
 import '../car-owner_book_maintenance/car-owner-event.dart';
@@ -212,7 +213,14 @@ class _ServiceProviderHomePageState extends State<ServiceProviderHomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ReceiveRequest(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromRGBO(244, 67, 54, 1),
                       foregroundColor: Colors.white,

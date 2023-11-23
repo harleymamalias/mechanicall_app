@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../service_provider_maintenance_ui/service_provider_homepage.dart';
+
 class PConfirm extends StatelessWidget {
-  @override 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff273E47),
@@ -18,14 +20,17 @@ class PConfirm extends StatelessWidget {
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 5),
-              child: Text(
-                'Your transaction was successful.',
-                style: GoogleFonts.inter(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              child: Center(
+                child: Text(
+                  'Your transaction was successful.',
+                  style: GoogleFonts.inter(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 5,
                 ),
-                maxLines: 5,
               ),
             ),
             Text(
@@ -34,26 +39,16 @@ class PConfirm extends StatelessWidget {
                 fontSize: 16,
                 color: Colors.white,
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 50),
-            const Text(
-              'How was your experience?',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PConfirm()));
-                    ////////////////////////////////////////////////////////////////////////////////
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const ServiceProviderHomePage()));
                   },
                   style: TextButton.styleFrom(
                     backgroundColor: const Color(0xffD8973C),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../User/Request/mainmap.dart';
+import '../car_owner_page.dart';
+
 class FeedbackAndReviewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -151,6 +154,12 @@ class FeedbackAndReviewsPage extends StatelessWidget {
                                   TextButton(
                                     onPressed: () {
                                       Navigator.of(context).pop();
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => HomeScreen(),
+                                        ),
+                                      );
                                     },
                                     child: const Text(
                                       'OK',

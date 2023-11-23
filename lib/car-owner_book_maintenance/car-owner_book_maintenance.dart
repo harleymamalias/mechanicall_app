@@ -67,6 +67,7 @@ class _CarOwnerBookMaintenancePageState
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
       color: Colors.white,
       child: SafeArea(

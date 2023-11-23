@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'User/Request/mainmap.dart';
 import 'app_styles.dart';
 import 'car-owner_book_maintenance/car-owner_book_maintenance.dart';
 import 'sidebar/service-provider-sidebar/service-provider_sidebar_card.dart';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          Placeholder(),
+          MainMap(),
           CarOwnerBookMaintenancePage(),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../payments/arrival_of_mechanic_page.dart';
 import '../../sidebar/sidebar_button.dart';
 import '../../sidebar/car-owner-sidebar/car-owner_sidebar_card.dart';
 
@@ -62,7 +63,7 @@ class Route2 extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return Route2();
+                            return ArrivalOfMechanicPage();
                           },
                         );
                       },
