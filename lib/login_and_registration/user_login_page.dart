@@ -7,7 +7,10 @@ import 'package:mechanicall_app/widgets/input_fields/password_input_field.dart';
 import 'package:mechanicall_app/widgets/social_media.dart';
 import 'package:mechanicall_app/widgets/input_fields/text_input_field.dart';
 
+import '../app_styles.dart';
 import '../car_owner_page.dart';
+import '../offline_mode.dart';
+import '../service_provider_maintenance_ui/service_provider_homepage.dart';
 
 class UserLoginPage extends StatelessWidget {
   UserLoginPage({super.key});
@@ -107,8 +110,7 @@ class UserLoginPage extends StatelessWidget {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomeScreen(),
+                                            builder: (context) => HomeScreen(),
                                           ),
                                         );
                                       },
@@ -182,7 +184,7 @@ class UserLoginPage extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                HomeScreen(),
+                                                const ServiceProviderHomePage(),
                                           ),
                                         );
                                       },
@@ -203,7 +205,7 @@ class UserLoginPage extends StatelessWidget {
                             );
                           },
                           style: TextButton.styleFrom(
-                            backgroundColor: const Color(0xffD8973C),
+                            backgroundColor: const Color(0xffA4243B),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6),
                             ),
@@ -232,7 +234,7 @@ class UserLoginPage extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text(
-                                    'Login Successful',
+                                    'Offline Mode',
                                     style: GoogleFonts.inter(
                                       textStyle: const TextStyle(
                                         color: Colors.black,
@@ -242,7 +244,7 @@ class UserLoginPage extends StatelessWidget {
                                     ),
                                   ),
                                   content: Text(
-                                    'Welcome back! Your login was successful.',
+                                    'You are now in offline mode.',
                                     style: GoogleFonts.inter(
                                       textStyle: const TextStyle(
                                           color: Colors.black, fontSize: 14),
@@ -256,7 +258,7 @@ class UserLoginPage extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                ArrivalOfMechanicPage(),
+                                                const OfflineMode(),
                                           ),
                                         );
                                       },
@@ -277,7 +279,7 @@ class UserLoginPage extends StatelessWidget {
                             );
                           },
                           style: TextButton.styleFrom(
-                            backgroundColor: const Color(0xffD8973C),
+                            backgroundColor: tGrey3,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6),
                             ),

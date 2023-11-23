@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_styles.dart';
+import '../../login_and_registration/user_login_page.dart';
 import '../../size_config.dart';
 import '../sidebar-general-pages/privacy-statement.dart';
 import '../sidebar-general-pages/report_issue.dart';
@@ -27,13 +28,14 @@ class ServiceProviderSidebar extends StatelessWidget {
                 Center(
                   child: CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/images/meksel.jpg'),
+                    backgroundImage:
+                        AssetImage('assets/images/noraa-ojenroc.jpg'),
                   ),
                 ),
                 SizedBox(height: 10),
                 Center(
                   child: Text(
-                    'Manoy Mexl',
+                    'Noraa Ojenroc',
                     style: tInterRegular.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -221,7 +223,7 @@ class ServiceProviderSidebar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 0, 0, 8.0),
             child: ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.logout_rounded,
                 color: tWhite,
               ),
@@ -234,11 +236,11 @@ class ServiceProviderSidebar extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => PrivacyStatementPage()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UserLoginPage()),
+                );
               },
             ),
           )

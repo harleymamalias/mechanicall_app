@@ -137,7 +137,7 @@ class ManageServiceProviderProfilePage extends StatelessWidget {
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
                                               image: AssetImage(
-                                                  'assets/images/meksel.jpg'),
+                                                  'assets/images/noraa-ojenroc.jpg'),
                                               fit: BoxFit.cover,
                                             ),
                                             boxShadow: [
@@ -178,7 +178,7 @@ class ManageServiceProviderProfilePage extends StatelessWidget {
                               ),
                               Center(
                                 child: Text(
-                                  'Manoy Mexl',
+                                  'Noraa Ojenroc',
                                   style: tInterSemiBold.copyWith(
                                     color: tWhite,
                                     fontSize:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_styles.dart';
+import '../../login_and_registration/user_login_page.dart';
 import '../../size_config.dart';
 import 'car-owner_profile.dart';
 import 'car-owner_vehicles.dart';
@@ -231,11 +232,11 @@ class CarOwnerSidebarCard extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => PrivacyStatementPage()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UserLoginPage()),
+                );
               },
             ),
           )

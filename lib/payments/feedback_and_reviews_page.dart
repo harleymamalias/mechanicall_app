@@ -40,18 +40,17 @@ class FeedbackAndReviewsPage extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.yellow,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     padding: const EdgeInsets.all(10),
-                    child: const CircleAvatar(
-                      // Replace with your profile image or icon
-                      backgroundColor: Colors.white,
-                      radius: 30,
-                      child: Icon(
-                        Icons.person,
-                        size: 40,
-                        color: Colors.black,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: Image.asset(
+                        'assets/images/noraa-ojenroc.jpg',
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -151,8 +150,7 @@ class FeedbackAndReviewsPage extends StatelessWidget {
                                 actions: [
                                   TextButton(
                                     onPressed: () {
-                                      Navigator.of(context)
-                                          .pop(); 
+                                      Navigator.of(context).pop();
                                     },
                                     child: const Text(
                                       'OK',

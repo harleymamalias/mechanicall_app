@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mechanicall_app/service_provider_maintenance_ui/appointment_booking_sp.dart';
+import 'service_provider_booked_maintenance_ui.dart';
 
 class RequestAssistanceFormServiceProvider extends StatelessWidget {
   const RequestAssistanceFormServiceProvider({super.key});
@@ -310,7 +310,7 @@ class RequestAssistanceFormServiceProvider extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const BookingAppointmentUIServiceProvider(),
+                                    ServiceProviderBookedMaintenanceUI(),
                               ),
                             );
                           },

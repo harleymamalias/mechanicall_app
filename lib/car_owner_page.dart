@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          TestPage(),
+          Placeholder(),
           CarOwnerBookMaintenancePage(),
         ],
       ),
@@ -48,56 +48,5 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
-  }
-}
-
-class TestPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    return Scaffold(
-        backgroundColor: tCharcoal,
-        body: Column(
-          children: [
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SidebarButton(),
-                ],
-              ),
-            ),
-            Center(
-              child: Text(
-                'Main Body',
-                style: tInterBold.copyWith(
-                  color: tWhite,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              onPressed: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CarOwnerBookMaintenancePage()),
-                );
-              },
-              child: Text("Book Appointment / Schedule Maintenance",
-                  style: tInterSemiBold.copyWith()),
-            ),
-          ],
-        ),
-        // endDrawer: CarOwnerSidebarCard());
-        endDrawer: ServiceProviderSidebar());
   }
 }
