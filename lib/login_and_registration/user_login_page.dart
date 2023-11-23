@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mechanicall_app/login_and_registration/create_account_options.dart';
+import 'package:mechanicall_app/payments/arrival_of_mechanic_page.dart';
 import 'package:mechanicall_app/widgets/input_fields/password_input_field.dart';
 import 'package:mechanicall_app/widgets/social_media.dart';
 import 'package:mechanicall_app/widgets/input_fields/text_input_field.dart';
@@ -98,7 +99,13 @@ class UserLoginPage extends StatelessWidget {
                                     TextButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
-                                        //to home screen
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ArrivalOfMechanicPage(),
+                                          ),
+                                        );
                                       },
                                       child: Text(
                                         'OK',
