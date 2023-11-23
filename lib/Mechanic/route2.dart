@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../sidebar/sidebar_button.dart';
 import '../../sidebar/car-owner-sidebar/car-owner_sidebar_card.dart';
+import 'payment.dart';
+import 'arrival.dart';
 
 class RouteM2 extends StatelessWidget {
   @override
@@ -43,7 +45,7 @@ class RouteM2 extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return RouteM2();
+                              return Arrival();
                             },
                           );
                         },
@@ -53,6 +55,31 @@ class RouteM2 extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Payment()));
+                        },
+                      child: Container(
+                        width: 59,
+                        height: 59,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFBD632F),
+                          shape: OvalBorder(),
+                        ),
+                        child: Image.asset(
+                          'assets/au-check.png', // Adjust height as needed
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 21),
+                  ],
                 ),
               ],
             ),

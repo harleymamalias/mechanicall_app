@@ -61,12 +61,6 @@ class Route1 extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Route2();
-                          },
-                        );
                       },
                       child: Container(
                         width: 59,
