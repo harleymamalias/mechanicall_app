@@ -8,7 +8,7 @@ class TermsAndConditionsAndPrivacyPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff273E47),
-      appBar: AppBar( 
+      appBar: AppBar(
         backgroundColor: const Color(0xffD8973C),
         centerTitle: true,
         title: Text(
