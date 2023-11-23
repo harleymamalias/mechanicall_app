@@ -99,7 +99,7 @@ class MainMap extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     GestureDetector(
-                      onTap: () {
+                      onLongPress: () {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {

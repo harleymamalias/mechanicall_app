@@ -4,6 +4,7 @@ import 'Mechanic/payment-confirmed.dart';
 import 'User/Request/mainmap.dart';
 import 'car_owner_page.dart';
 import 'login_and_registration/launch_screen.dart';
+import 'offline_mode.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: PConfirm(),
+      home: OfflineMode(),
     );
   }
 }

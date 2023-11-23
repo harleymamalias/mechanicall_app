@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'reviews.dart';
+
 class ViewMechanic2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,18 @@ class ViewMechanic2 extends StatelessWidget {
             ),
             SizedBox(
               height: 9,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ViewReviews();
+                  },
+                );
+              },
+              child: Text('View Reviews'),
             ),
             SizedBox(
               height: 77,
