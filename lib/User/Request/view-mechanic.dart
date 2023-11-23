@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'reviews.dart';
 
 class ViewMechanic extends StatelessWidget {
   @override
@@ -48,9 +49,17 @@ class ViewMechanic extends StatelessWidget {
             SizedBox(
               height: 9,
             ),
-            Text(
-              'View Reviews',
-              style: TextStyle(color: Colors.white, fontSize: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                    return ViewReviews();
+                  },
+                );
+              },
+              child: Text('View Reviews'),
             ),
             SizedBox(
               height: 77,
