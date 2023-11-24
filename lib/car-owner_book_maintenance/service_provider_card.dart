@@ -50,16 +50,20 @@ class _ServiceProviderCardState extends State<ServiceProviderCard> {
       widget.rating,
     );
 
-    setState(() {
-      isSelected = true;
-    });
-
-    // timer to reset isSelected after 2 seconds
-    Timer(Duration(seconds: 2), () {
+    if (mounted) {
       setState(() {
-        isSelected = false;
+        isSelected = true;
       });
-    });
+
+      // timer to reset isSelected after 2 seconds
+      Timer(Duration(seconds: 2), () {
+        if (mounted) {
+          setState(() {
+            isSelected = false;
+          });
+        }
+      });
+    }
   }
 
   void _showDetailsDialog(BuildContext context) {

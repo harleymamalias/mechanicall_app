@@ -395,14 +395,39 @@ class _CarOwnerBookMaintenancePageState
           ),
           actions: [
             ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: tOrange,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
-                  ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: tOrange,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
                 ),
-                onPressed: () {
+              ),
+              onPressed: () {
+                // Validate if all necessary selections are made
+                if (_selectedServiceProvider == null ||
+                    _selectedTime == null ||
+                    _eventController.text.isEmpty) {
+                  // Show an error message or handle the case where information is missing
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Error"),
+                        content: Text(
+                            "Please make sure to select service provider, time, and enter appointment description."),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  // Proceed to add the appointment
                   DateTime selectedDay = _selectedDay!;
                   Event newAppointment = Event(
                     eventType: 'appointment',
@@ -430,9 +455,11 @@ class _CarOwnerBookMaintenancePageState
                         null; // Clear the selected service provider
                   });
 
-                  Navigator.of(context).pop();
-                },
-                child: Text("Add Appointment")),
+                  Navigator.of(context).pop(); // Close the dialog
+                }
+              },
+              child: Text("Add Appointment"),
+            ),
           ],
         );
       },
