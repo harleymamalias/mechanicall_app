@@ -412,15 +412,24 @@ class _CarOwnerBookMaintenancePageState
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text("Error"),
+                        backgroundColor: tAmaranthPurple,
+                        title: Text(
+                          "Error",
+                          style: tInterBold.copyWith(color: tWhite),
+                        ),
                         content: Text(
-                            "Please make sure to select service provider, time, and enter appointment description."),
+                          "Please make sure to select service provider, time, and enter appointment description.",
+                          style: tInterMedium.copyWith(color: tWhite),
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: Text("OK"),
+                            child: Text(
+                              "OK",
+                              style: tInterMedium.copyWith(color: tWhite),
+                            ),
                           ),
                         ],
                       );
