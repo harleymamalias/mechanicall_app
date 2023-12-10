@@ -3,6 +3,7 @@ import '../../app_styles.dart';
 import '../../size_config.dart';
 
 class ManageProfilePage extends StatelessWidget {
+  //param to receive user details
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -332,7 +333,7 @@ class ManageProfilePage extends StatelessWidget {
                         )),
                   ),
                 ),
-                PasswordTextField(),
+                // PasswordTextField(),  TBD
                 SizedBox(
                   height: 10,
                 ),

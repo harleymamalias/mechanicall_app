@@ -23,8 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          MainMap(),
-          CarOwnerBookMaintenancePage(),
+          MainMap(), //parameters to pass user details
+          CarOwnerBookMaintenancePage(), //paramaters to pass user details
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(

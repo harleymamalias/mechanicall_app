@@ -11,6 +11,7 @@ import '../sidebar-general-pages/report_issue.dart';
 import '../sidebar-general-pages/data_backup.dart';
 
 class CarOwnerSidebarCard extends StatelessWidget {
+  //param receive user details
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -75,7 +76,8 @@ class CarOwnerSidebarCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ManageProfilePage()),
+                            builder: (context) =>
+                                ManageProfilePage()), //parameters
                       );
                     },
                   ),
@@ -94,7 +96,8 @@ class CarOwnerSidebarCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => OwnedVehiclesPage()),
+                            builder: (context) =>
+                                OwnedVehiclesPage()), //parameters
                       );
                     },
                   ),
@@ -234,8 +237,7 @@ class CarOwnerSidebarCard extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => UserLoginPage()),
+                  MaterialPageRoute(builder: (context) => UserLoginPage()),
                 );
               },
             ),
