@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "380160686748",
+    "project_id": "mechanicall-mobile-application",
+    "storage_bucket": "mechanicall-mobile-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380160686748:android:ad7de280342c8c68afcb59",
+        "android_client_info": {
+          "package_name": "com.example.mechanicall_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIGeFyZKUX3YO-z1G4u61uiscYehjj6w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
