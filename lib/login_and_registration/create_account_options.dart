@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mechanicall_app/login_and_registration/service_provider_registration.dart';
-import 'package:mechanicall_app/login_and_registration/user_login_page.dart';
-import 'package:mechanicall_app/login_and_registration/vehicle_owner_registration.dart';
+import 'service_provider_registration.dart';
+import 'user_login_page.dart';
+import 'vehicle_owner_registration.dart';
 
 class CreateAccountOptionsPage extends StatelessWidget {
   const CreateAccountOptionsPage({super.key});

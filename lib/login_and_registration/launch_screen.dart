@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mechanicall_app/login_and_registration/user_login_page.dart';
+import 'user_login_page.dart';
 
 class LaunchScreen extends StatelessWidget {
   const LaunchScreen({super.key});

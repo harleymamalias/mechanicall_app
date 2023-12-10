@@ -1,16 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mechanicall_app/login_and_registration/user_login_page.dart';
-import 'package:mechanicall_app/widgets/input_fields/email_address_input_field.dart';
-import 'package:mechanicall_app/widgets/input_fields/password_input_field.dart';
-import 'package:mechanicall_app/widgets/input_fields/phone_number_input_field.dart';
-import 'package:mechanicall_app/widgets/registration_completed_message.dart';
-import 'package:mechanicall_app/widgets/social_media.dart';
-import 'package:mechanicall_app/widgets/terms_and_conditions.dart';
-import 'package:mechanicall_app/widgets/input_fields/text_input_field.dart';
+import 'user_login_page.dart';
+import '../widgets/input_fields/email_address_input_field.dart';
+import '../widgets/input_fields/password_input_field.dart';
+import '../widgets/input_fields/phone_number_input_field.dart';
+// import '../widgets/registration_completed_message.dart';
+import '../widgets/social_media.dart';
+import '../widgets/terms_and_conditions.dart';
+import '../widgets/input_fields/text_input_field.dart';
 
 class VehicleOwnerRegistrationPage extends StatefulWidget {
-  const VehicleOwnerRegistrationPage({super.key});
+  const VehicleOwnerRegistrationPage({Key? key}) : super(key: key);
 
   @override
   State<VehicleOwnerRegistrationPage> createState() =>
@@ -19,6 +21,9 @@ class VehicleOwnerRegistrationPage extends StatefulWidget {
 
 class _VehicleOwnerRegistrationPageState
     extends State<VehicleOwnerRegistrationPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
@@ -27,6 +32,81 @@ class _VehicleOwnerRegistrationPageState
   final TextEditingController phoneNumberController = TextEditingController();
 
   bool? isChecked = false;
+
+  Future<void> registerUser() async {
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      await _firestore.collection('car_owners').doc(userCredential.user?.uid).set({
+        'firstname': firstnameController.text,
+        'lastname': lastnameController.text,
+        'username': usernameController.text,
+        'email': emailController.text,
+        'phoneNumber': phoneNumberController.text,
+      });
+
+      // Display registration completed message
+      _showRegistrationCompletedDialog();
+    } catch (e) {
+      print('Error during registration: $e');
+    }
+  }
+
+  void _showRegistrationCompletedDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Registration Completed',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          content: Text(
+            'Your account registration has been completed! You will be redirected to the login page.',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UserLoginPage(),
+                  ),
+                );
+              },
+              child: Text(
+                'OK',
+                style: GoogleFonts.inter(
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +127,7 @@ class _VehicleOwnerRegistrationPageState
                       children: [
                         Container(
                           alignment: Alignment.center,
-                          child: Image.asset(
-                              "assets/images/login-signup-logo.png"),
+                          child: Image.asset('assets/images/login-signup-logo.png'),
                         ),
                         const SizedBox(
                           height: 20,
@@ -153,16 +232,14 @@ class _VehicleOwnerRegistrationPageState
                                   height: 40,
                                   child: RichText(
                                     text: const TextSpan(
-                                      text:
-                                          'I acknowledge that I agree to the ',
+                                      text: 'I acknowledge that I agree to the ',
                                       style: TextStyle(color: Colors.white),
                                       children: [
                                         TextSpan(
                                           text: 'Terms of Use',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            decoration:
-                                                TextDecoration.underline,
+                                            decoration: TextDecoration.underline,
                                           ),
                                         ),
                                         TextSpan(
@@ -173,8 +250,7 @@ class _VehicleOwnerRegistrationPageState
                                           text: 'Privacy Policy',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            decoration:
-                                                TextDecoration.underline,
+                                            decoration: TextDecoration.underline,
                                           ),
                                         ),
                                         TextSpan(
@@ -192,7 +268,30 @@ class _VehicleOwnerRegistrationPageState
                         const SizedBox(
                           height: 10,
                         ),
-                        const RegistrationCompletedMessage(),
+                        TextButton(
+                          onPressed: () {
+                            registerUser();
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xffA4243B),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            elevation: 10,
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 40,
+                            child: Text(
+                              'Register',
+                              style: GoogleFonts.inter(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(
                           height: 30,
                         ),
@@ -240,7 +339,7 @@ class _VehicleOwnerRegistrationPageState
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

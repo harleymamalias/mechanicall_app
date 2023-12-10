@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mechanicall_app/login_and_registration/user_login_page.dart';
-import 'package:mechanicall_app/widgets/certifications_and_qualifications.dart';
-import 'package:mechanicall_app/widgets/input_fields/email_address_input_field.dart';
-import 'package:mechanicall_app/widgets/input_fields/password_input_field.dart';
-import 'package:mechanicall_app/widgets/input_fields/phone_number_input_field.dart';
-import 'package:mechanicall_app/widgets/registration_completed_message.dart';
-import 'package:mechanicall_app/widgets/social_media.dart';
-import 'package:mechanicall_app/widgets/terms_and_conditions.dart';
-import 'package:mechanicall_app/widgets/input_fields/text_input_field.dart';
+import 'user_login_page.dart';
+import '../widgets/certifications_and_qualifications.dart';
+import '../widgets/input_fields/email_address_input_field.dart';
+import '../widgets/input_fields/password_input_field.dart';
+import '../widgets/input_fields/phone_number_input_field.dart';
+import '../widgets/registration_completed_message.dart';
+import '../widgets/social_media.dart';
+import '../widgets/terms_and_conditions.dart';
+import '../widgets/input_fields/text_input_field.dart';
 
 class ServiceProviderRegistrationPage extends StatefulWidget {
   const ServiceProviderRegistrationPage({super.key});
@@ -48,7 +48,7 @@ class _ServiceProviderRegistrationPageState
                         Container(
                           alignment: Alignment.center,
                           child: Image.asset(
-                              "assets/images/login-signup-logo.png"),
+                              'assets/images/login-signup-logo.png'),
                         ),
                         const SizedBox(
                           height: 20,

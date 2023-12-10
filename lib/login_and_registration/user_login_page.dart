@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mechanicall_app/login_and_registration/create_account_options.dart';
-import 'package:mechanicall_app/payments/arrival_of_mechanic_page.dart';
-import 'package:mechanicall_app/widgets/input_fields/password_input_field.dart';
-import 'package:mechanicall_app/widgets/social_media.dart';
-import 'package:mechanicall_app/widgets/input_fields/text_input_field.dart';
+import 'create_account_options.dart';
+import '../widgets/input_fields/password_input_field.dart';
+import '../widgets/social_media.dart';
+import '../widgets/input_fields/text_input_field.dart';
 
 import '../app_styles.dart';
 import '../car_owner_page.dart';
@@ -63,7 +62,7 @@ class UserLoginPage extends StatelessWidget {
                         ),
                         TextInputField(
                           controller: usernameController,
-                          textPlaceHolder: 'Username',
+                          textPlaceHolder: 'Email',
                           textInputType: TextInputType.text,
                         ),
                         const SizedBox(
