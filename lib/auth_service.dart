@@ -88,7 +88,6 @@ class AuthService {
     } catch (e) {
       print('Error updating user details: $e');
       // Handle error, show a message, or throw the error depending on your requirements
-      throw e;
     }
   }
 }

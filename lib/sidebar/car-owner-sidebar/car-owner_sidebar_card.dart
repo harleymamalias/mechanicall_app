@@ -14,9 +14,7 @@ import 'package:provider/provider.dart';
 
 class CarOwnerSidebarCard extends StatelessWidget {
   // final Map<String, dynamic>? userDetails;
-
   // CarOwnerSidebarCard({Key? key, this.userDetails}) : super(key: key);
-
   //param receive user details
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class CarOwnerSidebarCard extends StatelessWidget {
                 SizedBox(height: 10),
                 Center(
                   child: Text(
-                    userDetails?['username'] ?? 'Default Username',
+                    userDetails?['username'] ?? '',
                     style: tInterRegular.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,

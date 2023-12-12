@@ -102,172 +102,183 @@ class _ServiceProviderHomePageState extends State<ServiceProviderHomePage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      body: Container(
-        color: tCharcoal,
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SidebarButton(),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TableCalendar(
-              eventLoader: _getEventsForDay,
-              locale: "en_US",
-              headerStyle: HeaderStyle(
-                formatButtonVisible: false,
-                titleCentered: true,
-                titleTextStyle: tInterBold.copyWith(
-                  fontSize: SizeConfig.blockSizeHorizontal! * 4.5,
-                  color: tOrange,
-                ),
-                leftChevronIcon: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: tWhite, width: 1.5)),
-                  child: Icon(
-                    Icons.chevron_left,
-                    color: tWhite,
-                  ),
-                ),
-                rightChevronIcon: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: tWhite, width: 1.5)),
-                  child: Icon(
-                    Icons.chevron_right,
-                    color: tWhite,
-                  ),
-                ),
-              ),
-              availableGestures: AvailableGestures.all,
-              firstDay: DateTime.utc(2010, 3, 14),
-              lastDay: DateTime.utc(2030, 3, 14),
-              focusedDay: today,
-              onDaySelected: _onDaySelected,
-              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-              calendarFormat: _calendarFormat,
-              onFormatChanged: (format) {
-                if (_calendarFormat != format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                }
-              },
-              onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
-              },
-              daysOfWeekStyle: DaysOfWeekStyle(
-                weekdayStyle: tInterMedium.copyWith(color: tOrange),
-                weekendStyle: tInterBold.copyWith(color: tOrange),
-              ),
-              calendarStyle: CalendarStyle(
-                defaultTextStyle: tInterRegular.copyWith(color: tWhite),
-                weekendTextStyle: tInterRegular.copyWith(color: tWhite),
-                outsideTextStyle: tInterRegular.copyWith(color: tOrange),
-                todayDecoration:
-                    BoxDecoration(color: tGrey3, shape: BoxShape.circle),
-                selectedDecoration:
-                    BoxDecoration(color: tOrange, shape: BoxShape.circle),
-                markerDecoration:
-                    BoxDecoration(color: tWhite, shape: BoxShape.circle),
-              ),
-            ),
             Container(
-              height: SizeConfig.blockSizeVertical! * 30,
-              child: ValueListenableBuilder(
-                  valueListenable: _selectedEvents,
-                  builder: (context, value, _) {
-                    return ListView.builder(
-                        itemCount: value.length,
-                        itemBuilder: (context, index) {
-                          Event event = value[index];
-                          return GestureDetector(
-                            onLongPress: () {
-                              _showAppointmentDetailsDialog(context, event);
-                            },
-                            child: SPEventListItem(
-                              eventType: event.eventType,
-                              serviceProviderName: event.serviceProviderName,
-                              serviceProviderPhoto: event.serviceProviderPhoto,
-                              email: event.email,
-                              phoneNumber: event.phoneNumber,
-                              location: event.location,
-                              rating: event.rating,
-                              bookingDescription: event.bookingDescription,
-                              bookingTime: event.bookingTime,
-                              bookingStatus: event.bookingStatus,
-                            ),
-                          );
-                        });
-                  }),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              color: tCharcoal,
+              child: Column(
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ReceiveRequest(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(244, 67, 54, 1),
-                      foregroundColor: Colors.white,
-                    ),
-                    child: Text(
-                      'Request',
-                      style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                          fontSize: 13,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SidebarButton(),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TableCalendar(
+                    eventLoader: _getEventsForDay,
+                    locale: "en_US",
+                    headerStyle: HeaderStyle(
+                      formatButtonVisible: false,
+                      titleCentered: true,
+                      titleTextStyle: tInterBold.copyWith(
+                        fontSize: SizeConfig.blockSizeHorizontal! * 4.5,
+                        color: tOrange,
+                      ),
+                      leftChevronIcon: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: tWhite, width: 1.5)),
+                        child: Icon(
+                          Icons.chevron_left,
+                          color: tWhite,
                         ),
                       ),
+                      rightChevronIcon: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: tWhite, width: 1.5)),
+                        child: Icon(
+                          Icons.chevron_right,
+                          color: tWhite,
+                        ),
+                      ),
+                    ),
+                    availableGestures: AvailableGestures.all,
+                    firstDay: DateTime.utc(2010, 3, 14),
+                    lastDay: DateTime.utc(2030, 3, 14),
+                    focusedDay: today,
+                    onDaySelected: _onDaySelected,
+                    selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                    calendarFormat: _calendarFormat,
+                    onFormatChanged: (format) {
+                      if (_calendarFormat != format) {
+                        setState(() {
+                          _calendarFormat = format;
+                        });
+                      }
+                    },
+                    onPageChanged: (focusedDay) {
+                      _focusedDay = focusedDay;
+                    },
+                    daysOfWeekStyle: DaysOfWeekStyle(
+                      weekdayStyle: tInterMedium.copyWith(color: tOrange),
+                      weekendStyle: tInterBold.copyWith(color: tOrange),
+                    ),
+                    calendarStyle: CalendarStyle(
+                      defaultTextStyle: tInterRegular.copyWith(color: tWhite),
+                      weekendTextStyle: tInterRegular.copyWith(color: tWhite),
+                      outsideTextStyle: tInterRegular.copyWith(color: tOrange),
+                      todayDecoration:
+                          BoxDecoration(color: tGrey3, shape: BoxShape.circle),
+                      selectedDecoration:
+                          BoxDecoration(color: tOrange, shape: BoxShape.circle),
+                      markerDecoration:
+                          BoxDecoration(color: tWhite, shape: BoxShape.circle),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const MaintenanceRequestReceivedPage(),
+                  Container(
+                    height: SizeConfig.blockSizeVertical! * 30,
+                    child: ValueListenableBuilder(
+                        valueListenable: _selectedEvents,
+                        builder: (context, value, _) {
+                          return ListView.builder(
+                              itemCount: value.length,
+                              itemBuilder: (context, index) {
+                                Event event = value[index];
+                                return GestureDetector(
+                                  onLongPress: () {
+                                    _showAppointmentDetailsDialog(
+                                        context, event);
+                                  },
+                                  child: SPEventListItem(
+                                    eventType: event.eventType,
+                                    serviceProviderName:
+                                        event.serviceProviderName,
+                                    serviceProviderPhoto:
+                                        event.serviceProviderPhoto,
+                                    email: event.email,
+                                    phoneNumber: event.phoneNumber,
+                                    location: event.location,
+                                    rating: event.rating,
+                                    bookingDescription:
+                                        event.bookingDescription,
+                                    bookingTime: event.bookingTime,
+                                    bookingStatus: event.bookingStatus,
+                                  ),
+                                );
+                              });
+                        }),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ReceiveRequest(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromRGBO(244, 67, 54, 1),
+                            foregroundColor: Colors.white,
+                          ),
+                          child: Text(
+                            'Request',
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: tAlloyOrange,
-                      foregroundColor: Colors.white,
-                    ),
-                    child: Text(
-                      'Appointment',
-                      style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                          fontSize: 13,
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const MaintenanceRequestReceivedPage(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: tAlloyOrange,
+                            foregroundColor: Colors.white,
+                          ),
+                          child: Text(
+                            'Appointment',
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 15,
             ),
           ],
         ),

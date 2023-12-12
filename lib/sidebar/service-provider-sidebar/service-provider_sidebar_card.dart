@@ -9,10 +9,14 @@ import 'service-provider_certifications_page.dart';
 import 'service-provider_feedback.dart';
 import 'service-provider_history.dart';
 import 'service-provider_profile.dart';
+import '../../auth_service.dart';
+import 'package:provider/provider.dart';
 
 class ServiceProviderSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    Map<String, dynamic>? userDetails = userProvider.userDetails;
     SizeConfig().init(context);
     return Drawer(
       backgroundColor: tCharcoal,
@@ -35,7 +39,7 @@ class ServiceProviderSidebar extends StatelessWidget {
                 SizedBox(height: 10),
                 Center(
                   child: Text(
-                    'Noraa Ojenroc',
+                    userDetails?['username'] ?? '',
                     style: tInterRegular.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -238,8 +242,7 @@ class ServiceProviderSidebar extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => UserLoginPage()),
+                  MaterialPageRoute(builder: (context) => UserLoginPage()),
                 );
               },
             ),

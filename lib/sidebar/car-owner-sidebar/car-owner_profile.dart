@@ -29,9 +29,6 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
     _userProvider = Provider.of<UserProvider>(context, listen: false);
     _initializeControllers();
     _loadCurrentUserDetails();
-
-    // print('User Details from UserProvider: ${_userProvider.userDetails}');
-    // print('User UID from UserProvider: ${_userProvider.userDetails?['uid']}');
   }
 
   void _loadCurrentUserDetails() async {
@@ -84,7 +81,7 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
       );
 
       await AuthService().refreshUserDetails(context);
-      // If you want to reload the state to display the newly edited details, you can use setState
+
       UserProvider userProvider =
           Provider.of<UserProvider>(context, listen: false);
       userProvider.setUserDetails({
@@ -98,7 +95,6 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
       print('User Details from UserProvider: ${_userProvider.userDetails}');
       print('User UID from UserProvider: ${_userProvider.userDetails?['uid']}');
     } catch (e) {
-      // Handle error, show a message, or throw the error depending on your requirements
       print('Error saving changes: $e');
     }
   }
@@ -371,6 +367,21 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(5),
+                      labelText: 'Email',
+                      hintStyle: tInterBold.copyWith(
+                        color: tCharcoal,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                      ),
+                    ),
+                    enabled: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: TextField(
                     controller: _usernameController,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(5),
@@ -410,20 +421,7 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(5),
-                      labelText: 'Email',
-                      hintStyle: tInterBold.copyWith(
-                        color: tCharcoal,
-                        fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                      ),
-                    ),
-                  ),
-                ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: TextField(
