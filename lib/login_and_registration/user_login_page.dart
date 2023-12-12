@@ -10,6 +10,8 @@ import '../widgets/social_media.dart';
 import '../widgets/input_fields/text_input_field.dart';
 import '../app_styles.dart';
 import '../offline_mode.dart';
+import '../auth_service.dart';
+import 'package:provider/provider.dart';
 
 class UserLoginPage extends StatefulWidget {
   const UserLoginPage({Key? key}) : super(key: key);
@@ -22,6 +24,14 @@ class _UserLoginPageState extends State<UserLoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  AuthService _authService = AuthService();
+
+  late UserProvider _userProvider; // Declare _userProvider
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+  }
 
   Future<void> _login() async {
     // Check if the user is a car owner or service provider. If the role is determined, redirect users to their corresponding homepages.
@@ -30,13 +40,24 @@ class _UserLoginPageState extends State<UserLoginPage> {
         email: emailController.text,
         password: passwordController.text,
       );
-
+      User user = userCredential.user!;
       String userId = userCredential.user!.uid;
       DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
           .collection('car_owners')
           .doc(userId)
           .get();
       if (userSnapshot.exists) {
+        Map<String, dynamic>? userDetails =
+            await _authService.getCurrentUserDetails();
+
+        _userProvider.setUserDetails({
+          'uid': user.uid, // Include the uid in the user details
+          'username': userDetails?['username'],
+          'firstname': userDetails?['firstname'],
+          'lastname': userDetails?['lastname'],
+          'email': userDetails?['email'],
+          'phoneNumber': userDetails?['phoneNumber'],
+        });
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -50,6 +71,18 @@ class _UserLoginPageState extends State<UserLoginPage> {
             .get();
 
         if (userSnapshot.exists) {
+          Map<String, dynamic>? userDetails =
+              await _authService.getCurrentUserDetails();
+
+          _userProvider.setUserDetails({
+            'uid': user.uid, // Include the uid in the user details
+            'username': userDetails?['username'],
+            'firstname': userDetails?['firstname'],
+            'lastname': userDetails?['lastname'],
+            'email': userDetails?['email'],
+            'phoneNumber': userDetails?['phoneNumber'],
+          });
+
           Navigator.push(
             context,
             MaterialPageRoute(

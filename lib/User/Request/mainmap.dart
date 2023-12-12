@@ -7,6 +7,9 @@ import '../../sidebar/sidebar_button.dart';
 import '../../sidebar/car-owner-sidebar/car-owner_sidebar_card.dart';
 
 class MainMap extends StatelessWidget {
+  final Map<String, dynamic>? userDetails;
+
+  MainMap({Key? key, this.userDetails}) : super(key: key);
   //final user details chuchu param
   @override
   Widget build(BuildContext context) {

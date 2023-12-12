@@ -5,7 +5,11 @@ import 'vehicle_card.dart';
 // import 'package:file_picker/file_picker.dart';
 
 class OwnedVehiclesPage extends StatelessWidget {
+  final Map<String, dynamic>? userDetails;
+
+  OwnedVehiclesPage({Key? key, this.userDetails}) : super(key: key);
   //param to receive vehicle details from user
+
   @override
   Widget build(BuildContext context) {
     return Container(

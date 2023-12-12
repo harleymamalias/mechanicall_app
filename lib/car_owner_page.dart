@@ -9,6 +9,10 @@ import 'sidebar/sidebar_button.dart';
 import 'size_config.dart';
 
 class HomeScreen extends StatefulWidget {
+  final Map<String, dynamic>? userDetails;
+
+  HomeScreen({Key? key, this.userDetails}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -23,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          MainMap(), //parameters to pass user details
-          CarOwnerBookMaintenancePage(), //paramaters to pass user details
+          MainMap(),
+          CarOwnerBookMaintenancePage(),
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(

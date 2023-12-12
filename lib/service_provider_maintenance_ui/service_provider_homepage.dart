@@ -15,7 +15,9 @@ import '../size_config.dart';
 import 'maintenance_request_received.dart';
 
 class ServiceProviderHomePage extends StatefulWidget {
-  const ServiceProviderHomePage({super.key});
+  final Map<String, dynamic>? userDetails;
+
+  const ServiceProviderHomePage({Key? key, this.userDetails}) : super(key: key);
 
   @override
   State<ServiceProviderHomePage> createState() =>
@@ -241,7 +243,8 @@ class _ServiceProviderHomePageState extends State<ServiceProviderHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MaintenanceRequestReceivedPage(),
+                          builder: (context) =>
+                              const MaintenanceRequestReceivedPage(),
                         ),
                       );
                     },

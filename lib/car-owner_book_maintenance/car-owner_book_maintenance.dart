@@ -10,7 +10,9 @@ import 'appointment_functions.dart';
 import 'appointment_list_card.dart';
 
 class CarOwnerBookMaintenancePage extends StatefulWidget {
-  const CarOwnerBookMaintenancePage({super.key});
+  final Map<String, dynamic>? userDetails;
+
+  CarOwnerBookMaintenancePage({Key? key, this.userDetails});
   @override
   State<CarOwnerBookMaintenancePage> createState() =>
       _CarOwnerBookMaintenancePageState();

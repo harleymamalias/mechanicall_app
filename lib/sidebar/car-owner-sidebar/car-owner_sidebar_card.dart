@@ -9,11 +9,20 @@ import 'premium_page.dart';
 import '../sidebar-general-pages/privacy-statement.dart';
 import '../sidebar-general-pages/report_issue.dart';
 import '../sidebar-general-pages/data_backup.dart';
+import '../../auth_service.dart';
+import 'package:provider/provider.dart';
 
 class CarOwnerSidebarCard extends StatelessWidget {
+  // final Map<String, dynamic>? userDetails;
+
+  // CarOwnerSidebarCard({Key? key, this.userDetails}) : super(key: key);
+
   //param receive user details
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    Map<String, dynamic>? userDetails = userProvider.userDetails;
+
     SizeConfig().init(context);
     return Drawer(
       backgroundColor: tCharcoal,
@@ -35,7 +44,7 @@ class CarOwnerSidebarCard extends StatelessWidget {
                 SizedBox(height: 10),
                 Center(
                   child: Text(
-                    'Harley Mamalias',
+                    userDetails?['username'] ?? 'Default Username',
                     style: tInterRegular.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -76,8 +85,7 @@ class CarOwnerSidebarCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                ManageProfilePage()), //parameters
+                            builder: (context) => ManageProfilePage()),
                       );
                     },
                   ),
@@ -96,8 +104,9 @@ class CarOwnerSidebarCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                OwnedVehiclesPage()), //parameters
+                            builder: (context) => OwnedVehiclesPage(
+                                  userDetails: userDetails,
+                                )), //parameters
                       );
                     },
                   ),

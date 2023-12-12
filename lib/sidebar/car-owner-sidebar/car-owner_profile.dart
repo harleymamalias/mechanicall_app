@@ -1,9 +1,108 @@
 import 'package:flutter/material.dart';
 import '../../app_styles.dart';
 import '../../size_config.dart';
+import '../../auth_service.dart';
+import 'package:provider/provider.dart';
 
-class ManageProfilePage extends StatelessWidget {
-  //param to receive user details
+class ManageProfilePage extends StatefulWidget {
+  // final Map<String, dynamic>? userDetails;
+
+  // ManageProfilePage({Key? key, this.userDetails}) : super(key: key);
+
+  @override
+  _ManageProfilePageState createState() => _ManageProfilePageState();
+}
+
+class _ManageProfilePageState extends State<ManageProfilePage> {
+  late AuthService _authService;
+  late UserProvider _userProvider;
+
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    _initializeControllers();
+    _loadCurrentUserDetails();
+
+    // print('User Details from UserProvider: ${_userProvider.userDetails}');
+    // print('User UID from UserProvider: ${_userProvider.userDetails?['uid']}');
+  }
+
+  void _loadCurrentUserDetails() async {
+    try {
+      Map<String, dynamic>? userDetails =
+          await AuthService().getCurrentUserDetails();
+
+      if (userDetails != null) {
+        _usernameController.text = userDetails['username'] ?? '';
+        _firstNameController.text = userDetails['firstname'] ?? '';
+        _lastNameController.text = userDetails['lastname'] ?? '';
+        _emailController.text = userDetails['email'] ?? '';
+        _phoneNumberController.text = userDetails['phoneNumber'] ?? '';
+
+        _userProvider.setUserDetails(userDetails);
+      }
+    } catch (e) {
+      print('Error loading user details: $e');
+    }
+  }
+
+  void _initializeControllers() {
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    _usernameController.text = userProvider.userDetails?['username'] ?? '';
+    _firstNameController.text = userProvider.userDetails?['firstname'] ?? '';
+    _lastNameController.text = userProvider.userDetails?['lastname'] ?? '';
+    _emailController.text = userProvider.userDetails?['email'] ?? '';
+    _phoneNumberController.text =
+        userProvider.userDetails?['phoneNumber'] ?? '';
+  }
+
+  Future<void> _saveChanges() async {
+    try {
+      // Call updateCurrentUserDetails to update Firestore
+      await AuthService().updateCurrentUserDetails(
+        username: _usernameController.text,
+        firstname: _firstNameController.text,
+        lastname: _lastNameController.text,
+        email: _emailController.text,
+        phoneNumber: _phoneNumberController.text,
+      );
+
+      // Display a success message or perform any other actions after saving changes
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Changes saved successfully'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+
+      await AuthService().refreshUserDetails(context);
+      // If you want to reload the state to display the newly edited details, you can use setState
+      UserProvider userProvider =
+          Provider.of<UserProvider>(context, listen: false);
+      userProvider.setUserDetails({
+        'username': _usernameController.text,
+        'firstname': _firstNameController.text,
+        'lastname': _lastNameController.text,
+        'email': _emailController.text,
+        'phoneNumber': _phoneNumberController.text,
+      });
+      _loadCurrentUserDetails();
+      print('User Details from UserProvider: ${_userProvider.userDetails}');
+      print('User UID from UserProvider: ${_userProvider.userDetails?['uid']}');
+    } catch (e) {
+      // Handle error, show a message, or throw the error depending on your requirements
+      print('Error saving changes: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -179,7 +278,7 @@ class ManageProfilePage extends StatelessWidget {
                               ),
                               Center(
                                 child: Text(
-                                  'Harley Mamalias',
+                                  '${_userProvider.userDetails?['firstname'] ?? ''} ${_userProvider.userDetails?['lastname'] ?? ''}',
                                   style: tInterSemiBold.copyWith(
                                     color: tWhite,
                                     fontSize:
@@ -189,7 +288,8 @@ class ManageProfilePage extends StatelessWidget {
                               ),
                               Center(
                                 child: Text(
-                                  '+63 9545 214 912',
+                                  _userProvider.userDetails?['phoneNumber'] ??
+                                      'Default Number',
                                   style: tInterRegular.copyWith(
                                     color: tWhite2,
                                     fontSize:
@@ -271,66 +371,71 @@ class ManageProfilePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: TextField(
+                    controller: _usernameController,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(5),
-                        labelText: 'Username',
-                        hintText: 'Edit Username',
-                        hintStyle: tInterBold.copyWith(
-                          color: tCharcoal,
-                          fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                        )),
+                      contentPadding: EdgeInsets.all(5),
+                      labelText: 'Username',
+                      hintStyle: tInterBold.copyWith(
+                        color: tCharcoal,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: TextField(
+                    controller: _firstNameController,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(5),
-                        labelText: 'First Name',
-                        hintText: 'Edit First Name',
-                        hintStyle: tInterBold.copyWith(
-                          color: tCharcoal,
-                          fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                        )),
+                      contentPadding: EdgeInsets.all(5),
+                      labelText: 'First Name',
+                      hintStyle: tInterBold.copyWith(
+                        color: tCharcoal,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: TextField(
+                    controller: _lastNameController,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(5),
-                        labelText: 'Mamalias',
-                        hintText: 'Edit Last Name',
-                        hintStyle: tInterBold.copyWith(
-                          color: tCharcoal,
-                          fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                        )),
+                      contentPadding: EdgeInsets.all(5),
+                      labelText: 'Last Name',
+                      hintStyle: tInterBold.copyWith(
+                        color: tCharcoal,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(5),
-                        labelText: 'Email',
-                        hintText: 'Edit Email',
-                        hintStyle: tInterBold.copyWith(
-                          color: tCharcoal,
-                          fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                        )),
+                      contentPadding: EdgeInsets.all(5),
+                      labelText: 'Email',
+                      hintStyle: tInterBold.copyWith(
+                        color: tCharcoal,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: TextField(
+                    controller: _phoneNumberController,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(5),
-                        labelText: 'Phone Number',
-                        hintText: 'Edit Phone Number',
-                        hintStyle: tInterBold.copyWith(
-                          color: tCharcoal,
-                          fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                        )),
+                      contentPadding: EdgeInsets.all(5),
+                      labelText: 'Phone Number',
+                      hintStyle: tInterBold.copyWith(
+                        color: tCharcoal,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                      ),
+                    ),
                   ),
                 ),
                 // PasswordTextField(),  TBD
@@ -343,26 +448,28 @@ class ManageProfilePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       OutlinedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text(
-                            "CANCEL",
-                            style: tInterBold,
-                          )),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "CANCEL",
+                          style: tInterBold,
+                        ),
+                      ),
                       ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: tOrange,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24),
-                            ),
+                        onPressed: _saveChanges,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: tOrange,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
                           ),
-                          child: Text(
-                            "SAVE",
-                            style: tInterBold.copyWith(color: tWhite),
-                          )),
+                        ),
+                        child: Text(
+                          "SAVE",
+                          style: tInterBold.copyWith(color: tWhite),
+                        ),
+                      ),
                     ],
                   ),
                 )
