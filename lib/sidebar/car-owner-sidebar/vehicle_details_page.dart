@@ -3,14 +3,12 @@ import '../../app_styles.dart';
 import '../../size_config.dart';
 
 class VehicleDetails extends StatelessWidget {
-  final String imageUrl;
   final String make;
   final String model;
   final String year;
   final String licensePlate;
 
   const VehicleDetails({
-    required this.imageUrl,
     required this.make,
     required this.model,
     required this.year,
@@ -21,11 +19,11 @@ class VehicleDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.transparent),
+      decoration: const BoxDecoration(color: Colors.transparent),
       child: SafeArea(
         child: Scaffold(
           body: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -38,14 +36,8 @@ class VehicleDetails extends StatelessWidget {
                   color: tCharcoal,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: SizeConfig.blockSizeVertical! * 40,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                  imageUrl,
-                                ),
-                                fit: BoxFit.cover)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -54,7 +46,7 @@ class VehicleDetails extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: SizeConfig.blockSizeHorizontal! * 25,
                                     height: SizeConfig.blockSizeVertical! * 7.5,
                                     child: GestureDetector(
@@ -69,7 +61,7 @@ class VehicleDetails extends StatelessWidget {
                                               SizeConfig.blockSizeHorizontal! *
                                                   7.5,
                                           color: tWhite,
-                                          shadows: [
+                                          shadows: const [
                                             Shadow(
                                               offset: Offset(2.0, 2.0),
                                               blurRadius: 3.0,
@@ -88,7 +80,7 @@ class VehicleDetails extends StatelessWidget {
                                         fontSize:
                                             SizeConfig.blockSizeHorizontal! * 5,
                                         shadows: [
-                                          Shadow(
+                                          const Shadow(
                                             offset: Offset(2.0, 2.0),
                                             blurRadius: 3.0,
                                             color: Colors.black,
@@ -114,7 +106,7 @@ class VehicleDetails extends StatelessWidget {
                   right: 0,
                   child: Container(
                     height: SizeConfig.blockSizeVertical! * 60,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30)),
@@ -135,7 +127,7 @@ class VehicleDetails extends StatelessWidget {
                               textAlign: TextAlign.center,
                               text: TextSpan(children: [
                                 TextSpan(
-                                  text: "$make ",
+                                  text: '$make ',
                                   style: tInterMedium.copyWith(
                                     color: tWhite,
                                     fontSize:
@@ -181,7 +173,7 @@ class VehicleDetails extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          "Year",
+                                          'Year',
                                           style: tInterRegular.copyWith(
                                             color: tWhite,
                                             fontSize:
@@ -217,7 +209,7 @@ class VehicleDetails extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          "License Plate",
+                                          'License Plate',
                                           style: tInterRegular.copyWith(
                                             color: tWhite,
                                             fontSize:
@@ -279,7 +271,7 @@ class VehicleDetails extends StatelessWidget {
                                   color: tWhite,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 16,
                               ),
                               Expanded(
@@ -296,7 +288,7 @@ class VehicleDetails extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text(
-                                        "Edit License Plate / Photo",
+                                        'Edit License Plate / Photo',
                                         style: tInterBold.copyWith(
                                             color: tWhite,
                                             fontSize:

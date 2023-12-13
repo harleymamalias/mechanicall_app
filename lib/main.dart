@@ -13,6 +13,7 @@ Future main() async {
     appId: '1:380160686748:android:ad7de280342c8c68afcb59',
     messagingSenderId: '380160686748',
     projectId: 'mechanicall-mobile-application',
+    storageBucket: 'mechanicall-mobile-application.appspot.com'
   ));
   runApp(
     ChangeNotifierProvider(

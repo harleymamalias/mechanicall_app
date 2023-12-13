@@ -4,18 +4,16 @@ import '../../size_config.dart';
 import 'vehicle_details_page.dart';
 
 class VehicleCard extends StatelessWidget {
-  final String imagePath;
   final String make;
   final String model;
   final String year;
   final String licensePlate;
 
-  VehicleCard({
-    required this.imagePath,
+  const VehicleCard({super.key, 
     required this.make,
     required this.model,
     required this.year,
-    required this.licensePlate,
+    required this.licensePlate
   });
 
   @override
@@ -26,7 +24,6 @@ class VehicleCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => VehicleDetails(
-              imageUrl: imagePath,
               make: make,
               model: model,
               year: year,
@@ -40,7 +37,7 @@ class VehicleCard extends StatelessWidget {
         child: Container(
           height: SizeConfig.blockSizeVertical! * 18,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
               colors: [tCharcoal, Color(0xff125670)],
@@ -54,10 +51,6 @@ class VehicleCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: tOrange,
                   borderRadius: BorderRadius.circular(16),
-                  image: DecorationImage(
-                    image: AssetImage(imagePath),
-                    fit: BoxFit.cover,
-                  ),
                 ),
               ),
               Padding(
@@ -68,7 +61,7 @@ class VehicleCard extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                      child: Container(
+                      child: SizedBox(
                         width: SizeConfig.blockSizeHorizontal! * 37,
                         child: RichText(
                           maxLines: 1,
@@ -81,7 +74,7 @@ class VehicleCard extends StatelessWidget {
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                text: '$model',
+                                text: model,
                                 style: tInterBold.copyWith(
                                   color: tWhite,
                                   fontSize: SizeConfig.blockSizeHorizontal! * 4,
@@ -94,7 +87,7 @@ class VehicleCard extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                      child: Container(
+                      child: SizedBox(
                         width: SizeConfig.blockSizeHorizontal! * 37,
                         child: RichText(
                           maxLines: 1,
@@ -107,7 +100,7 @@ class VehicleCard extends StatelessWidget {
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                text: '$year',
+                                text: year,
                                 style: tInterBold.copyWith(
                                   color: tWhite,
                                   fontSize: SizeConfig.blockSizeHorizontal! * 4,
@@ -118,7 +111,7 @@ class VehicleCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                       child: Text(
