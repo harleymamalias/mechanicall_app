@@ -373,42 +373,40 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                               const SizedBox(
                                 width: 16,
                               ),
-                              Expanded(
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: tEcru,
-                                    foregroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: tOrange,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
-                                  onPressed: () async {
-                                    // Show the EditVehicleDialog and pass the required data
-                                    await showDialog(
-                                      context: context,
-                                      builder: (context) => EditVehicleDialog(
-                                        documentId: widget.documentId,
-                                        initialMake: make,
-                                        initialModel: model,
-                                        initialYear: year,
-                                        initialLicensePlate: licensePlate,
-                                      ),
-                                    );
+                                ),
+                                onPressed: () async {
+                                  // Show the EditVehicleDialog and pass the required data
+                                  await showDialog(
+                                    context: context,
+                                    builder: (context) => EditVehicleDialog(
+                                      documentId: widget.documentId,
+                                      initialMake: make,
+                                      initialModel: model,
+                                      initialYear: year,
+                                      initialLicensePlate: licensePlate,
+                                    ),
+                                  );
 
-                                    await updateVehicleDetails();
-                                  },
-                                  child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        // 'Edit License Plate / Photo',
-                                        'Edit',
-                                        style: tInterBold.copyWith(
-                                            color: tWhite,
-                                            fontSize:
-                                                SizeConfig.blockSizeVertical! *
-                                                    1.5),
-                                      ),
+                                  await updateVehicleDetails();
+                                },
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      // 'Edit License Plate / Photo',
+                                      'Edit',
+                                      style: tInterBold.copyWith(
+                                          color: tWhite,
+                                          fontSize:
+                                              SizeConfig.blockSizeVertical! *
+                                                  1.5),
                                     ),
                                   ),
                                 ),

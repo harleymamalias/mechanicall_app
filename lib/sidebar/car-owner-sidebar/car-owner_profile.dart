@@ -75,6 +75,7 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
       _loadCurrentUserDetails();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          backgroundColor: Colors.green,
           content: Text('Changes saved successfully'),
           duration: Duration(seconds: 2),
         ),
