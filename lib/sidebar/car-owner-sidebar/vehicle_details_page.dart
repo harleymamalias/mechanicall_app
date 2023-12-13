@@ -387,8 +387,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                                     await showDialog(
                                       context: context,
                                       builder: (context) => EditVehicleDialog(
-                                        documentId: widget
-                                            .documentId, // Pass the documentId
+                                        documentId: widget.documentId,
                                         initialMake: make,
                                         initialModel: model,
                                         initialYear: year,
