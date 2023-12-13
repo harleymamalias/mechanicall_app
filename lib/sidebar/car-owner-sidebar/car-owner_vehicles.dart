@@ -19,7 +19,13 @@ class OwnedVehiclesPage extends StatelessWidget {
           .doc(user.uid)
           .collection('vehicles')
           .snapshots()
-          .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+          .map((snapshot) {
+        return snapshot.docs.map((doc) {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          data['documentId'] = doc.id;
+          return data;
+        }).toList();
+      });
     } else {
       return Stream.empty();
     }
@@ -91,10 +97,11 @@ class OwnedVehiclesPage extends StatelessWidget {
                         itemBuilder: (context, index) {
                           var vehicle = snapshot.data![index];
                           return VehicleCard(
+                            documentId: vehicle['documentId'],
                             make: vehicle['make'],
                             model: vehicle['model'],
                             year: vehicle['year'],
-                            licensePlate: vehicle['licensePlate'], 
+                            licensePlate: vehicle['licensePlate'],
                             // imagePath: '',
                           );
                         },
@@ -125,4 +132,3 @@ class OwnedVehiclesPage extends StatelessWidget {
     );
   }
 }
-

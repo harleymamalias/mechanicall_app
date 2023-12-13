@@ -4,17 +4,19 @@ import '../../size_config.dart';
 import 'vehicle_details_page.dart';
 
 class VehicleCard extends StatelessWidget {
+  final String documentId;
   final String make;
   final String model;
   final String year;
   final String licensePlate;
 
-  const VehicleCard({super.key, 
-    required this.make,
-    required this.model,
-    required this.year,
-    required this.licensePlate
-  });
+  const VehicleCard(
+      {super.key,
+      required this.documentId,
+      required this.make,
+      required this.model,
+      required this.year,
+      required this.licensePlate});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,14 @@ class VehicleCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => VehicleDetails(
-              make: make,
-              model: model,
-              year: year,
-              licensePlate: licensePlate,
+            builder: (context) => KeyedSubtree(
+              child: VehicleDetails(
+                documentId: documentId,
+                make: make,
+                model: model,
+                year: year,
+                licensePlate: licensePlate,
+              ),
             ),
           ),
         );

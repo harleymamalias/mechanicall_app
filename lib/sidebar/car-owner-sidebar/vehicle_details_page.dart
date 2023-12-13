@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import '../../app_styles.dart';
 import '../../size_config.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'edit_vehicle_dialog.dart';
 
-class VehicleDetails extends StatelessWidget {
+class VehicleDetails extends StatefulWidget {
+  final String documentId;
   final String make;
   final String model;
   final String year;
   final String licensePlate;
 
   const VehicleDetails({
+    required this.documentId,
     required this.make,
     required this.model,
     required this.year,
@@ -17,7 +22,95 @@ class VehicleDetails extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<VehicleDetails> createState() => _VehicleDetailsState();
+}
+
+class _VehicleDetailsState extends State<VehicleDetails> {
+  late String documentId;
+  late String make;
+  late String model;
+  late String year;
+  late String licensePlate;
+
+  @override
+  void initState() {
+    super.initState();
+    documentId = widget.documentId;
+    make = widget.make;
+    model = widget.model;
+    year = widget.year;
+    licensePlate = widget.licensePlate;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Future<bool> showConfirmationDialog(BuildContext context) async {
+      return await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Confirmation'),
+            content: Text('Are you sure you want to delete this vehicle?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: Text('No'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                child: Text('Yes'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    void deleteVehicle() async {
+      try {
+        User? user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          await FirebaseFirestore.instance
+              .collection('car_owners')
+              .doc(user.uid)
+              .collection('vehicles')
+              .doc(widget.documentId)
+              .delete();
+          Navigator.pop(context);
+        }
+      } catch (e) {
+        print('Error deleting vehicle: $e');
+      }
+    }
+
+    Future<void> updateVehicleDetails() async {
+      try {
+        User? user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          // Reload the updated data from Firestore
+          DocumentSnapshot updatedData = await FirebaseFirestore.instance
+              .collection('car_owners')
+              .doc(user.uid)
+              .collection('vehicles')
+              .doc(widget.documentId)
+              .get();
+
+          setState(() {
+            make = updatedData['make'];
+            model = updatedData['model'];
+            year = updatedData['year'];
+            licensePlate = updatedData['licensePlate'];
+          });
+        }
+      } catch (e) {
+        print('Error updating vehicle details: $e');
+      }
+    }
+
     return Container(
       decoration: const BoxDecoration(color: Colors.transparent),
       child: SafeArea(
@@ -127,7 +220,7 @@ class VehicleDetails extends StatelessWidget {
                               textAlign: TextAlign.center,
                               text: TextSpan(children: [
                                 TextSpan(
-                                  text: '$make ',
+                                  text: '${make} ',
                                   style: tInterMedium.copyWith(
                                     color: tWhite,
                                     fontSize:
@@ -264,7 +357,13 @@ class VehicleDetails extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                 ),
-                                onPressed: () async {},
+                                onPressed: () async {
+                                  bool confirmDelete =
+                                      await showConfirmationDialog(context);
+                                  if (confirmDelete) {
+                                    deleteVehicle();
+                                  }
+                                },
                                 child: Icon(
                                   Icons.delete_rounded,
                                   size: SizeConfig.blockSizeHorizontal! * 5,
@@ -283,12 +382,28 @@ class VehicleDetails extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
-                                  onPressed: () async {},
+                                  onPressed: () async {
+                                    // Show the EditVehicleDialog and pass the required data
+                                    await showDialog(
+                                      context: context,
+                                      builder: (context) => EditVehicleDialog(
+                                        documentId: widget
+                                            .documentId, // Pass the documentId
+                                        initialMake: make,
+                                        initialModel: model,
+                                        initialYear: year,
+                                        initialLicensePlate: licensePlate,
+                                      ),
+                                    );
+
+                                    await updateVehicleDetails();
+                                  },
                                   child: Center(
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text(
-                                        'Edit License Plate / Photo',
+                                        // 'Edit License Plate / Photo',
+                                        'Edit',
                                         style: tInterBold.copyWith(
                                             color: tWhite,
                                             fontSize:
