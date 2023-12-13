@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PhoneNumberInputField extends StatelessWidget {
   const PhoneNumberInputField({
@@ -31,9 +32,11 @@ class PhoneNumberInputField extends StatelessWidget {
           hintText: textPlaceHolder,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.all(0),
-          hintStyle: const TextStyle(
-            fontSize: 14,
-            height: 1,
+          hintStyle: GoogleFonts.inter(
+            textStyle: const TextStyle(
+              fontSize: 14,
+              height: 1,
+            ),
           ),
         ),
       ),

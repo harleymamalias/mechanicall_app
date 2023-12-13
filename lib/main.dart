@@ -9,12 +9,11 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: const FirebaseOptions(
-    apiKey: 'AIzaSyDmeCR3A57c078NKaChT6XNtT5csACh0NM',
-    appId: '1:380160686748:android:ad7de280342c8c68afcb59',
-    messagingSenderId: '380160686748',
-    projectId: 'mechanicall-mobile-application',
-    storageBucket: 'mechanicall-mobile-application.appspot.com'
-  ));
+          apiKey: 'AIzaSyDmeCR3A57c078NKaChT6XNtT5csACh0NM',
+          appId: '1:380160686748:android:ad7de280342c8c68afcb59',
+          messagingSenderId: '380160686748',
+          projectId: 'mechanicall-mobile-application',
+          storageBucket: 'mechanicall-mobile-application.appspot.com'));
   runApp(
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
