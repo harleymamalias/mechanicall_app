@@ -37,13 +37,15 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
           await AuthService().getCurrentUserDetails();
 
       if (userDetails != null) {
-        _usernameController.text = userDetails['username'] ?? '';
-        _firstNameController.text = userDetails['firstname'] ?? '';
-        _lastNameController.text = userDetails['lastname'] ?? '';
-        _emailController.text = userDetails['email'] ?? '';
-        _phoneNumberController.text = userDetails['phoneNumber'] ?? '';
+        setState(() {
+          _usernameController.text = userDetails['username'] ?? '';
+          _firstNameController.text = userDetails['firstname'] ?? '';
+          _lastNameController.text = userDetails['lastname'] ?? '';
+          _emailController.text = userDetails['email'] ?? '';
+          _phoneNumberController.text = userDetails['phoneNumber'] ?? '';
 
-        _userProvider.setUserDetails(userDetails);
+          _userProvider.setUserDetails(userDetails);
+        });
       }
     } catch (e) {
       print('Error loading user details: $e');
@@ -63,7 +65,6 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
 
   Future<void> _saveChanges() async {
     try {
-      // Call updateCurrentUserDetails to update Firestore
       await AuthService().updateCurrentUserDetails(
         username: _usernameController.text,
         firstname: _firstNameController.text,
@@ -71,8 +72,7 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
         email: _emailController.text,
         phoneNumber: _phoneNumberController.text,
       );
-
-      // Display a success message or perform any other actions after saving changes
+      _loadCurrentUserDetails();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Changes saved successfully'),
@@ -91,7 +91,7 @@ class _ManageProfilePageState extends State<ManageProfilePage> {
         'email': _emailController.text,
         'phoneNumber': _phoneNumberController.text,
       });
-      _loadCurrentUserDetails();
+
       print('User Details from UserProvider: ${_userProvider.userDetails}');
       print('User UID from UserProvider: ${_userProvider.userDetails?['uid']}');
     } catch (e) {

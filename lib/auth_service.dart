@@ -90,6 +90,47 @@ class AuthService {
       // Handle error, show a message, or throw the error depending on your requirements
     }
   }
+
+  Future<void> updateCurrentServiceProviderDetails({
+    required String username,
+    required String firstname,
+    required String lastname,
+    required String email,
+    required String phoneNumber,
+  }) async {
+    try {
+      User? user = _auth.currentUser;
+
+      if (user != null) {
+        // Update user details in Firestore based on the user's UID
+
+        await FirebaseFirestore.instance
+            .collection('service_providers')
+            .doc(user.uid)
+            .update({
+          'username': username,
+          'firstname': firstname,
+          'lastname': lastname,
+          'email': email,
+          'phoneNumber': phoneNumber,
+        });
+
+        await FirebaseFirestore.instance
+            .collection('car_owners')
+            .doc(user.uid)
+            .update({
+          'username': username,
+          'firstname': firstname,
+          'lastname': lastname,
+          'email': email,
+          'phoneNumber': phoneNumber,
+        });
+      }
+    } catch (e) {
+      print('Error updating user details: $e');
+      // Handle error, show a message, or throw the error depending on your requirements
+    }
+  }
 }
 
 class UserProvider extends ChangeNotifier {
