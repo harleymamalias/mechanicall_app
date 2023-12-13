@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'user_login_page.dart';
@@ -5,7 +7,6 @@ import '../widgets/certifications_and_qualifications.dart';
 import '../widgets/input_fields/email_address_input_field.dart';
 import '../widgets/input_fields/password_input_field.dart';
 import '../widgets/input_fields/phone_number_input_field.dart';
-import '../widgets/registration_completed_message.dart';
 import '../widgets/social_media.dart';
 import '../widgets/terms_and_conditions.dart';
 import '../widgets/input_fields/text_input_field.dart';
@@ -20,14 +21,94 @@ class ServiceProviderRegistrationPage extends StatefulWidget {
 
 class _ServiceProviderRegistrationPageState
     extends State<ServiceProviderRegistrationPage> {
-  final TextEditingController usernameController = TextEditingController();
+  final FirebaseAuth serviceProviderAuth = FirebaseAuth.instance;
+  final FirebaseFirestore serviceProviderFirestore = FirebaseFirestore.instance;
+
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController serviceproviderNameController =
+      TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
 
   bool? isChecked = false;
+
+  Future<void> registerServiceProvider() async {
+    try {
+      UserCredential serviceProviderCredential =
+          await serviceProviderAuth.createUserWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text);
+
+      await serviceProviderFirestore
+          .collection('service_providers')
+          .doc(serviceProviderCredential.user?.uid)
+          .set({
+        'email': emailController.text,
+        'username': usernameController.text,
+        'firstname': firstnameController.text,
+        'lastname': lastnameController.text,
+        'phoneNumber': phoneNumberController.text,
+      });
+      _showRegistrationCompletedDialog();
+    } catch (e) {
+      print('Error during registration: $e');
+    }
+  }
+
+  void _showRegistrationCompletedDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Registration Completed',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          content: Text(
+            'Your account registration has been completed! You will be redirected to the login page.',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UserLoginPage(),
+                  ),
+                );
+              },
+              child: Text(
+                'OK',
+                style: GoogleFonts.inter(
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,10 +153,10 @@ class _ServiceProviderRegistrationPageState
                         const SizedBox(
                           height: 15,
                         ),
-                        TextInputField(
-                          controller: usernameController,
-                          textPlaceHolder: 'Username',
-                          textInputType: TextInputType.text,
+                        EmailInputField(
+                          controller: emailController,
+                          textPlaceHolder: 'Email',
+                          textInputType: TextInputType.emailAddress,
                         ),
                         const SizedBox(
                           height: 7,
@@ -83,6 +164,14 @@ class _ServiceProviderRegistrationPageState
                         PasswordInputField(
                           controller: passwordController,
                           textPlaceHolder: 'Password',
+                          textInputType: TextInputType.text,
+                        ),
+                        const SizedBox(
+                          height: 7,
+                        ),
+                        TextInputField(
+                          controller: usernameController,
+                          textPlaceHolder: 'Service Provider Name',
                           textInputType: TextInputType.text,
                         ),
                         const SizedBox(
@@ -103,19 +192,6 @@ class _ServiceProviderRegistrationPageState
                         ),
                         const SizedBox(
                           height: 7,
-                        ),
-                        TextInputField(
-                          controller: lastnameController,
-                          textPlaceHolder: 'Service Provider Name',
-                          textInputType: TextInputType.text,
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        EmailInputField(
-                          controller: emailController,
-                          textPlaceHolder: 'Email',
-                          textInputType: TextInputType.emailAddress,
                         ),
                         const SizedBox(
                           height: 7,
@@ -205,7 +281,30 @@ class _ServiceProviderRegistrationPageState
                         const SizedBox(
                           height: 10,
                         ),
-                        const RegistrationCompletedMessage(),
+                        TextButton(
+                          onPressed: () {
+                            registerServiceProvider();
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xffA4243B),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            elevation: 10,
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 40,
+                            child: Text(
+                              'Register',
+                              style: GoogleFonts.inter(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(
                           height: 30,
                         ),
@@ -236,7 +335,7 @@ class _ServiceProviderRegistrationPageState
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => UserLoginPage(),
+                                      builder: (context) => const UserLoginPage(),
                                     ),
                                   );
                                 },
