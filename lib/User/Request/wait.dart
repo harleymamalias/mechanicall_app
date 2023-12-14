@@ -96,7 +96,7 @@ class _WaitState extends State<Wait> {
                     if (globalCarOwnerId != null) {
                       DocumentReference carOwnerRef = FirebaseFirestore.instance
                           .collection(
-                              'car_owners') // Adjust the collection name as necessary
+                              'car_owners')
                           .doc(globalCarOwnerId);
                       batch.update(carOwnerRef,
                           {'requests': FieldValue.delete()});
@@ -106,7 +106,7 @@ class _WaitState extends State<Wait> {
                       DocumentReference serviceProviderRef = FirebaseFirestore
                           .instance
                           .collection(
-                              'service_providers') // Adjust the collection name as necessary
+                              'service_providers')
                           .doc(globalServiceProviderId);
                       batch.update(serviceProviderRef,
                           {'requests': FieldValue.delete()});
