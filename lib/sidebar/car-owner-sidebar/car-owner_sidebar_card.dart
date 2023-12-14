@@ -13,9 +13,6 @@ import '../../auth_service.dart';
 import 'package:provider/provider.dart';
 
 class CarOwnerSidebarCard extends StatelessWidget {
-  // final Map<String, dynamic>? userDetails;
-  // CarOwnerSidebarCard({Key? key, this.userDetails}) : super(key: key);
-  //param receive user details
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);

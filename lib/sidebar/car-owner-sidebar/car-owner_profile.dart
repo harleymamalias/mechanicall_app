@@ -5,10 +5,6 @@ import '../../auth_service.dart';
 import 'package:provider/provider.dart';
 
 class ManageProfilePage extends StatefulWidget {
-  // final Map<String, dynamic>? userDetails;
-
-  // ManageProfilePage({Key? key, this.userDetails}) : super(key: key);
-
   @override
   _ManageProfilePageState createState() => _ManageProfilePageState();
 }
