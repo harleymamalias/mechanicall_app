@@ -20,7 +20,6 @@ class _WaitState extends State<Wait> {
   @override
   void initState() {
     super.initState();
-    // Subscribe to the changes in the roadside_assistance document
     _statusSubscription = FirebaseFirestore.instance
         .collection('roadside_assistance')
         .doc(widget.docId)
@@ -31,7 +30,6 @@ class _WaitState extends State<Wait> {
           status = snapshot['status'];
         });
         if (status == 'confirmed') {
-          // Status changed to confirmed, show the RouteCreation dialog
           showDialog(
             context: context,
             barrierDismissible: false,
@@ -46,7 +44,6 @@ class _WaitState extends State<Wait> {
 
   @override
   void dispose() {
-    // Cancel the subscription to avoid memory leaks
     _statusSubscription.cancel();
     super.dispose();
   }
@@ -95,18 +92,16 @@ class _WaitState extends State<Wait> {
 
                     if (globalCarOwnerId != null) {
                       DocumentReference carOwnerRef = FirebaseFirestore.instance
-                          .collection(
-                              'car_owners')
+                          .collection('car_owners')
                           .doc(globalCarOwnerId);
-                      batch.update(carOwnerRef,
-                          {'requests': FieldValue.delete()});
+                      batch.update(
+                          carOwnerRef, {'requests': FieldValue.delete()});
                     }
 
                     if (globalServiceProviderId != null) {
                       DocumentReference serviceProviderRef = FirebaseFirestore
                           .instance
-                          .collection(
-                              'service_providers')
+                          .collection('service_providers')
                           .doc(globalServiceProviderId);
                       batch.update(serviceProviderRef,
                           {'requests': FieldValue.delete()});
