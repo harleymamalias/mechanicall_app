@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'route-creation.dart';
+import 'package:mechanicall_app/roadside_assistance_id.dart';
 
 class Wait extends StatefulWidget {
   final String docId;
@@ -84,10 +85,35 @@ class _WaitState extends State<Wait> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    await FirebaseFirestore.instance
+                    WriteBatch batch = FirebaseFirestore.instance.batch();
+
+                    DocumentReference requestRef = FirebaseFirestore.instance
                         .collection('roadside_assistance')
-                        .doc(widget.docId)
-                        .delete();
+                        .doc(widget.docId);
+
+                    batch.delete(requestRef);
+
+                    if (globalCarOwnerId != null) {
+                      DocumentReference carOwnerRef = FirebaseFirestore.instance
+                          .collection(
+                              'car_owners')
+                          .doc(globalCarOwnerId);
+                      batch.update(carOwnerRef,
+                          {'requests': FieldValue.delete()});
+                    }
+
+                    if (globalServiceProviderId != null) {
+                      DocumentReference serviceProviderRef = FirebaseFirestore
+                          .instance
+                          .collection(
+                              'service_providers')
+                          .doc(globalServiceProviderId);
+                      batch.update(serviceProviderRef,
+                          {'requests': FieldValue.delete()});
+                    }
+
+                    await batch.commit();
+
                     Navigator.pop(context);
                   },
                   child: Text('Cancel'),
