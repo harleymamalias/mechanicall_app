@@ -83,14 +83,17 @@ class _WaitState extends State<Wait> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await FirebaseFirestore.instance
+                        .collection('roadside_assistance')
+                        .doc(widget.docId)
+                        .delete();
                     Navigator.pop(context);
                   },
                   child: Text('Cancel'),
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    // Change the status to confirmed
                     await FirebaseFirestore.instance
                         .collection('roadside_assistance')
                         .doc(widget.docId)
