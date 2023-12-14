@@ -9,7 +9,7 @@ class VehicleCard extends StatelessWidget {
   final String model;
   final String year;
   final String licensePlate;
-  final String imagePath;
+  final String? imagePath;
 
   const VehicleCard({
     Key? key,
@@ -35,7 +35,7 @@ class VehicleCard extends StatelessWidget {
                 model: model,
                 year: year,
                 licensePlate: licensePlate,
-                imagePath: imagePath,
+                imagePath: imagePath ?? "",
               ),
             ),
           ),
@@ -60,10 +60,12 @@ class VehicleCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: tOrange,
                   borderRadius: BorderRadius.circular(16),
-                  image: DecorationImage(
-                    image: NetworkImage(imagePath),
-                    fit: BoxFit.contain,
-                  ),
+                  image: imagePath != null
+                      ? DecorationImage(
+                          image: NetworkImage(imagePath!),
+                          fit: BoxFit.contain,
+                        )
+                      : null, // Don't provide DecorationImage if imagePath is null
                 ),
               ),
               Padding(
