@@ -26,7 +26,7 @@ class VehicleCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-          context,
+          context,  
           MaterialPageRoute(
             builder: (context) => KeyedSubtree(
               child: VehicleDetails(
