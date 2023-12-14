@@ -13,6 +13,41 @@ import '../sidebar/service-provider-sidebar/service-provider_sidebar_card.dart';
 import '../sidebar/sidebar_button.dart';
 import '../size_config.dart';
 import 'maintenance_request_received.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+Future<List<String>> fetchRequestIds() async {
+  List<String> requestIds = [];
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? user = _auth.currentUser;
+
+  if (user != null) {
+    try {
+      // Fetch the document for the current service provider
+      DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
+          .collection('service_providers')
+          .doc(user.uid) // Using the Firebase Auth user ID
+          .get();
+
+      if (docSnapshot.exists) {
+        Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+        if (data.containsKey('requests')) {
+          // Extract the request IDs from the 'requests' field
+          List<dynamic> requests = data['requests'];
+          requestIds = List<String>.from(requests);
+        }
+      }
+    } catch (e) {
+      print('Error fetching request IDs: $e');
+      // Handle any errors here
+    }
+  } else {
+    print('No user is currently signed in');
+    // Handle the case where no user is signed in
+  }
+
+  return requestIds;
+}
 
 class ServiceProviderHomePage extends StatefulWidget {
   final Map<String, dynamic>? userDetails;
@@ -222,11 +257,12 @@ class _ServiceProviderHomePageState extends State<ServiceProviderHomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            List<String> requestIds = await fetchRequestIds();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ReceiveRequest(),
+                                builder: (context) => ReceiveRequest(requestIds: requestIds),
                               ),
                             );
                           },

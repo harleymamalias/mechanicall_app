@@ -1,7 +1,55 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'route-creation.dart';
 
-class Wait extends StatelessWidget {
+class Wait extends StatefulWidget {
+  final String docId;
+
+  const Wait({Key? key, required this.docId}) : super(key: key);
+
+  @override
+  _WaitState createState() => _WaitState();
+}
+
+class _WaitState extends State<Wait> {
+  late StreamSubscription<DocumentSnapshot> _statusSubscription;
+  late String status;
+
+  @override
+  void initState() {
+    super.initState();
+    // Subscribe to the changes in the roadside_assistance document
+    _statusSubscription = FirebaseFirestore.instance
+        .collection('roadside_assistance')
+        .doc(widget.docId)
+        .snapshots()
+        .listen((snapshot) {
+      if (snapshot.exists) {
+        setState(() {
+          status = snapshot['status'];
+        });
+        if (status == 'confirmed') {
+          // Status changed to confirmed, show the RouteCreation dialog
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return RouteCreation();
+            },
+          );
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // Cancel the subscription to avoid memory leaks
+    _statusSubscription.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -19,9 +67,10 @@ class Wait extends StatelessWidget {
             Text(
               'Request Sent',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(
               "Waiting for confirmation...",
@@ -40,15 +89,12 @@ class Wait extends StatelessWidget {
                   child: Text('Cancel'),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return RouteCreation();
-                      },
-                    );
+                  onPressed: () async {
+                    // Change the status to confirmed
+                    await FirebaseFirestore.instance
+                        .collection('roadside_assistance')
+                        .doc(widget.docId)
+                        .update({'status': 'confirmed'});
                   },
                   child: Text('Done'),
                 ),
