@@ -1,9 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mechanicall_app/payments/feedback_and_reviews_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mechanicall_app/roadside_assistance_id.dart';
 
-class PaymentConfirmed extends StatelessWidget {
+class PaymentConfirmed extends StatefulWidget {
+  PaymentConfirmed({Key? key}) : super(key: key);
+
   @override
+  _PaymentConfirmedState createState() => _PaymentConfirmedState();
+}
+
+class _PaymentConfirmedState extends State<PaymentConfirmed> {
+  @override
+  void initState() {
+    super.initState();
+    if (globalRoadsideAssistanceDocId != null) {
+      _updateStatusToCompleted();
+    }
+  }
+
+  Future<void> _updateStatusToCompleted() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('roadside_assistance')
+          .doc(globalRoadsideAssistanceDocId)
+          .update({'status': 'completed'});
+    } catch (e) {
+      print("Error updating status: $e");
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff273E47),
