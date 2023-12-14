@@ -134,8 +134,14 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                   color: tCharcoal,
                   child: Column(
                     children: [
-                      SizedBox(
+                      Container(
                         height: SizeConfig.blockSizeVertical! * 40,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  imagePath,
+                                ),
+                                fit: BoxFit.cover)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -220,8 +226,8 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                           height: SizeConfig.blockSizeVertical! * 1,
                         ),
                         // Image.network(
-                        //   imagePath, 
-                        //   fit: BoxFit.cover, 
+                        //   imagePath,
+                        //   fit: BoxFit.cover,
                         // ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(24, 10, 24, 8),

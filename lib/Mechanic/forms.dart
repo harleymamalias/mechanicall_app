@@ -1,7 +1,65 @@
 import 'package:flutter/material.dart';
 import 'route-create.dart';
+import '../roadside_assistance_id.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RequestForm extends StatelessWidget {
+class RequestForm extends StatefulWidget {
+  @override
+  _RequestFormState createState() => _RequestFormState();
+}
+
+class _RequestFormState extends State<RequestForm> {
+  Map<String, dynamic> requestData = {};
+  Map<String, dynamic> carOwnerData = {};
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchRequestData();
+  }
+
+  Future<void> fetchRequestData() async {
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('roadside_assistance')
+          .doc(globalRoadsideAssistanceDocId)
+          .get();
+
+      if (snapshot.exists) {
+      var data = snapshot.data() as Map<String, dynamic>;
+      setState(() {
+        requestData = data;
+      });
+      fetchCarOwnerData(data['userId']);
+    }
+    } catch (e) {
+      print("Error fetching request data: $e");
+    }
+  }
+
+  Future<void> fetchCarOwnerData(String? userId) async {
+    if (userId == null) {
+      print("User ID is null");
+      return;
+    }
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('car_owners')
+          .doc(userId)
+          .get();
+
+      if (snapshot.exists) {
+        setState(() {
+          carOwnerData = snapshot.data() as Map<String, dynamic>;
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      print("Error fetching request data: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -24,19 +82,33 @@ class RequestForm extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             Text(
-              'Car breakdown',
+              requestData['description'] ??
+                  'Unknown problem', // Replace with actual field name
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             Text(
-              "Car won't start. The last time I heard from my car engine was that it sounded weird.",
+              requestData['location'] ??
+                  'No description provided', // Replace with actual field name
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             Text(
-              "ETA: 5 minutes",
+              '${carOwnerData['firstname'] ?? 'No'} ${carOwnerData['lastname'] ?? 'description provided'}',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
-            Image.asset(
-              'assets/au-mechanic-r1.png',
+            Text(
+              requestData['vehicleModel'] ??
+                  'No description provided', // Replace with actual field name
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            Text(
+              requestData['timestamp'] != null
+                ? formatDate(requestData['timestamp'].toDate())
+                : 'Unknown time',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            Text(
+              "ETA: 15 mins",
+              style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -48,15 +120,25 @@ class RequestForm extends StatelessWidget {
                   child: Text('Cancel'),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return RouteCreate();
-                      },
-                    );
+                  onPressed: () async {
+                    try {
+                      await FirebaseFirestore.instance
+                          .collection('roadside_assistance')
+                          .doc(
+                              globalRoadsideAssistanceDocId) 
+                          .update({'status': 'confirmed'});
+
+                      Navigator.pop(context);
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return RouteCreate();
+                        },
+                      );
+                    } catch (e) {
+                      print('Error updating status: $e');
+                    }
                   },
                   child: Text('Accept'),
                 ),
@@ -68,3 +150,8 @@ class RequestForm extends StatelessWidget {
     );
   }
 }
+
+String formatDate(DateTime dateTime) {
+  return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour}:${dateTime.minute}';
+}
+

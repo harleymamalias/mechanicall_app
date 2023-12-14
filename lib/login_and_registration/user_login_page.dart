@@ -51,7 +51,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
             await _authService.getCurrentUserDetails();
 
         _userProvider.setUserDetails({
-          'uid': user.uid, // Include the uid in the user details
+          'uid': user.uid,
           'username': userDetails?['username'],
           'firstname': userDetails?['firstname'],
           'lastname': userDetails?['lastname'],
@@ -75,7 +75,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
               await _authService.getCurrentUserDetails();
 
           _userProvider.setUserDetails({
-            'uid': user.uid, // Include the uid in the user details
+            'uid': user.uid,
             'username': userDetails?['username'],
             'firstname': userDetails?['firstname'],
             'lastname': userDetails?['lastname'],
@@ -90,7 +90,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
             ),
           );
         } else {
-          //if not car owner or service provider, handle error
+          //if not car owner or service provider, blablablabla
         }
       }
     } on FirebaseAuthException catch (e) {

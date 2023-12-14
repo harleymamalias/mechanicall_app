@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
 import'route1.dart';
 
-class RouteCreate extends StatelessWidget {
+class RouteCreate extends StatefulWidget {
+  @override
+  _RouteCreationState createState() => _RouteCreationState();
+}
+
+class _RouteCreationState extends State<RouteCreate> {
+  @override
+  void initState() {
+    super.initState();
+
+    // Add a delay before navigating to Route1
+    Future.delayed(Duration(seconds: 5), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RouteM1()),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -30,25 +48,8 @@ class RouteCreate extends StatelessWidget {
             SizedBox(
               height: 100,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Cancel'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RouteM1()),
-                    );
-                  },
-                  child: Text('Done'),
-                ),
-              ],
+            CircularProgressIndicator(
+              color: Colors.white,
             ),
           ],
         ),
