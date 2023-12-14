@@ -11,6 +11,7 @@ class VehicleDetails extends StatefulWidget {
   final String model;
   final String year;
   final String licensePlate;
+  final String imagePath;
 
   const VehicleDetails({
     required this.documentId,
@@ -18,6 +19,7 @@ class VehicleDetails extends StatefulWidget {
     required this.model,
     required this.year,
     required this.licensePlate,
+    required this.imagePath,
     Key? key,
   }) : super(key: key);
 
@@ -31,6 +33,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
   late String model;
   late String year;
   late String licensePlate;
+  late String imagePath;
 
   @override
   void initState() {
@@ -40,6 +43,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
     model = widget.model;
     year = widget.year;
     licensePlate = widget.licensePlate;
+    imagePath = widget.imagePath;
   }
 
   @override
@@ -104,6 +108,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
             model = updatedData['model'];
             year = updatedData['year'];
             licensePlate = updatedData['licensePlate'];
+            imagePath = updatedData['imagePath'];
           });
         }
       } catch (e) {
@@ -214,6 +219,10 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 1,
                         ),
+                        // Image.network(
+                        //   imagePath, 
+                        //   fit: BoxFit.cover, 
+                        // ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(24, 10, 24, 8),
                           child: RichText(

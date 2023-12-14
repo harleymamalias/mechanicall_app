@@ -9,14 +9,17 @@ class VehicleCard extends StatelessWidget {
   final String model;
   final String year;
   final String licensePlate;
+  final String imagePath;
 
-  const VehicleCard(
-      {super.key,
-      required this.documentId,
-      required this.make,
-      required this.model,
-      required this.year,
-      required this.licensePlate});
+  const VehicleCard({
+    Key? key,
+    required this.documentId,
+    required this.make,
+    required this.model,
+    required this.year,
+    required this.licensePlate,
+    required this.imagePath,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,7 @@ class VehicleCard extends StatelessWidget {
                 model: model,
                 year: year,
                 licensePlate: licensePlate,
+                imagePath: imagePath,
               ),
             ),
           ),
@@ -56,6 +60,10 @@ class VehicleCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: tOrange,
                   borderRadius: BorderRadius.circular(16),
+                  image: DecorationImage(
+                    image: NetworkImage(imagePath),
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               Padding(

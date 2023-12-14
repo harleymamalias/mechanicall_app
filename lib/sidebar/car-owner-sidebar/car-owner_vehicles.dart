@@ -102,7 +102,7 @@ class OwnedVehiclesPage extends StatelessWidget {
                             model: vehicle['model'],
                             year: vehicle['year'],
                             licensePlate: vehicle['licensePlate'],
-                            // imagePath: '',
+                            imagePath: vehicle['imagePath'],
                           );
                         },
                       );
